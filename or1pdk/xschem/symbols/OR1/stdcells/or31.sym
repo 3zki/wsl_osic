@@ -1,4 +1,4 @@
-v {xschem version=3.1.0 file_version=1.2
+v {xschem version=3.4.5 file_version=1.2
 * Copyright 2023-2024 Mori Mizuki, Noritsuna Imamura(ISHI-KAI)
 * Copyright 2022 Stefan Frederik Schippers
 *
@@ -16,11 +16,14 @@ v {xschem version=3.1.0 file_version=1.2
 }
 G {}
 K {type=primitive
-format="@name @@A @@B @@C @VDD @VSS @@X or31"
-template="name=x1 VDD=VDD VSS=GND"
+format="tcleval( @models
+@name @@A @@B @@C @VDD @VSS @@X or31"
 extra="VDD VSS"
 highlight=true
-function3="0 1 2 | |"}
+function3="0 1 2 | |"
+
+template="name=x1 VDD=VDD VSS=GND
+models=\\".include $::LIB/stdcells_sim/or31.lib\\""}
 V {}
 S {}
 E {}

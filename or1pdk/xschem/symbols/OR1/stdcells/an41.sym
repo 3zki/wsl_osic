@@ -17,11 +17,12 @@ v {xschem version=3.4.5 file_version=1.2
 G {}
 K {type=primitive
 function4="0 1 2 3 & & &"
-format="@name @@A @@B @@C @@D @VDD @VSS @@Y an31"
-template="name=x1 VDD=VDD VSS=GND"
+format="tcleval( @models
+@name @@A @@B @@C @@D @VDD @VSS @@Y an41"
 extra="VDD VSS"
 highlight=true
-}
+template="name=x1 VDD=VDD VSS=GND
+models=\\".include $::LIB/stdcells_sim/an41.lib\\""}
 V {}
 S {}
 E {}

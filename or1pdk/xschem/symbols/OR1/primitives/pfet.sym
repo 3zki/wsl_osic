@@ -20,7 +20,7 @@ format="@spiceprefix@name @pinlist @model L=@L W=@W m=@m @extra"
 lvs_format="@spiceprefix@name @pinlist @model L=@L W=@W m=@m"
 spiceprefix=X
 template="name=M1 
-model=pchOR1ex
+model=pchor1ex
 W=2u
 L=0.6u
 m=1

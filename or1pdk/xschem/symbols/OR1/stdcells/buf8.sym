@@ -16,10 +16,12 @@ v {xschem version=3.4.5 file_version=1.2
 }
 G {}
 K {type=primitive
-format="@name @@A @VDD @VSS @@Y buf8"
-template="name=x1 VDD=VDD VSS=GND"
+format="tcleval( @models
+@name @@A @VDD @VSS @@Y buf8"
 extra="VDD VSS"
 highlight=true
+template="name=x1 VDD=VDD VSS=GND
+models=\\".include $::LIB/stdcells_sim/buf8.lib\\""
 }
 V {}
 S {}

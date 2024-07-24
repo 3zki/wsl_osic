@@ -19,13 +19,13 @@ T {OR1 stdcells} 280 -620 0 0 0.5 0.5 {}
 T {etc...} 400 -120 0 0 0.5 0.5 {}
 C {devices/title.sym} 160 -30 0 0 {name=l1 author="MakeLSI & ISHI-kai"}
 C {primitives/nfet.sym} 100 -330 0 0 {name=M2
-model=nchOR1ex
+model=nchorex1
 W=1u
 L=0.6u
 m=1
 }
 C {primitives/pfet.sym} 100 -490 0 0 {name=M1 
-model=pchOR1ex
+model=pchorex1
 W=2u
 L=0.6u
 m=1
@@ -33,10 +33,14 @@ m=1
 C {devices/code.sym} 70 -200 0 0 {name=PTS06_MODELS
 only_toplevel=true
 format="tcleval( @value )"
-value=".include /home/user/.xschem/lib/PTS06/mos.lib
-.include /home/user/.xschem/lib/PTS06/stdcells.lib"
+value=".include $::LIB/mos.lib"
 spice_ignore=false}
-C {stdcells/an21.sym} 360 -520 0 0 {name=x1 VDD=VDD VSS=GND}
-C {stdcells/an31.sym} 360 -420 0 0 {name=x2 VDD=VDD VSS=GND}
-C {stdcells/an41.sym} 360 -280 0 0 {name=x3 VDD=VDD VSS=GND}
-C {stdcells/buf1.sym} 340 -160 0 0 {name=x4 VDD=VDD VSS=GND}
+C {stdcells/an31.sym} 360 -420 0 0 {name=x2 VDD=VDD VSS=GND
+models=".include $::LIB/stdcells_sim/an31.lib"}
+C {stdcells/an41.sym} 360 -280 0 0 {name=x3 VDD=VDD VSS=GND
+models=".include $::LIB/stdcells_sim/an41.lib"}
+C {stdcells/buf1.sym} 340 -160 0 0 {name=x4 VDD=VDD VSS=GND
+models=".include $::LIB/stdcells_sim/buf1.lib"}
+C {.xschem/symbols/OR1/stdcells/an21.sym} 360 -520 0 0 {name=x1 VDD=VDD VSS=GND
+models=".include $::LIB/stdcells_sim/an21.lib"}
+C {.xschem/symbols/OR1/stdcells/fill.sym} 340 -110 0 0 {name=x5 VDD=VDD VSS=GND}
