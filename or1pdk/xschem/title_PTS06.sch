@@ -41,6 +41,6 @@ C {stdcells/an41.sym} 360 -280 0 0 {name=x3 VDD=VDD VSS=GND
 models=".include $::LIB/stdcells_sim/an41.lib"}
 C {stdcells/buf1.sym} 340 -160 0 0 {name=x4 VDD=VDD VSS=GND
 models=".include $::LIB/stdcells_sim/buf1.lib"}
-C {.xschem/symbols/OR1/stdcells/an21.sym} 360 -520 0 0 {name=x1 VDD=VDD VSS=GND
+C {stdcells/an21.sym} 360 -520 0 0 {name=x1 VDD=VDD VSS=GND
 models=".include $::LIB/stdcells_sim/an21.lib"}
-C {.xschem/symbols/OR1/stdcells/fill.sym} 340 -110 0 0 {name=x5 VDD=VDD VSS=GND}
+C {stdcells/fill.sym} 340 -110 0 0 {name=x5 VDD=VDD VSS=GND}
