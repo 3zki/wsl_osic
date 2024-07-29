@@ -19,15 +19,15 @@ T {OR1 stdcells} 280 -620 0 0 0.5 0.5 {}
 T {etc...} 400 -120 0 0 0.5 0.5 {}
 C {devices/title.sym} 160 -30 0 0 {name=l1 author="MakeLSI & ISHI-kai"}
 C {primitives/nfet.sym} 100 -330 0 0 {name=M2
-model=nchorex1
-W=1u
-L=0.6u
+model=nchor1ex
+W=2u
+L=1u
 m=1
 }
 C {primitives/pfet.sym} 100 -490 0 0 {name=M1 
-model=pchorex1
-W=2u
-L=0.6u
+model=pchor1ex
+W=6u
+L=1u
 m=1
 }
 C {devices/code.sym} 70 -200 0 0 {name=PTS06_MODELS
