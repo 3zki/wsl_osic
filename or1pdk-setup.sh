@@ -51,9 +51,9 @@ if [ ! -d "$HOME/.xschem" ]; then
   cd $my_dir
   cp -f or1pdk/xschem/xschemrc_PTS06 $HOME/.xschem/xschemrc
   cp -f or1pdk/xschem/title_PTS06.sch $HOME/.xschem/title_PTS06.sch
-  mkdir -p $HOME /.xschem/symbols
+  mkdir -p $HOME/.xschem/symbols
   cp -aR ./or1pdk/xschem/symbols/* $HOME/.xschem/symbols/
-  mkdir -p $HOME /.xschem/lib
+  mkdir -p $HOME/.xschem/lib
   cp -aR ./or1pdk/xschem/lib/* $HOME/.xschem/lib/
 fi
 
