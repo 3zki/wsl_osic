@@ -25,7 +25,7 @@ if [ ! -d "$HOME/.klayout" ]; then
 	mkdir $HOME/.klayout
 	mkdir $HOME/.klayout/salt
 	mkdir $HOME/.klayout/macros
-	mkdir $home/.klayout/libraries
+	# mkdir $home/.klayout/libraries
 fi
 
 # Delete previous PDK
@@ -42,16 +42,18 @@ fi
 cp -f or1pdk/or1_lvs_make_stdcells.lym $HOME/.klayout/macros/or1_lvs_make_stdcells.lym
 cp -f or1pdk/or1_lvs_make.lym $HOME/.klayout/macros/or1_lvs_make.lym
 cp -f or1pdk/klayoutrc $HOME/.klayout/klayoutrc
-cp -aR or1pdk/GDS/PTS06/* $HOME/.klayout/libraries
+# cp -aR or1pdk/GDS/PTS06/* $HOME/.klayout/libraries
 
 
 
-if [ ! -d "$HOME/.xschem/symbols" ]; then
-  mkdir -p $HOME/.xschem/symbols
+if [ ! -d "$HOME/.xschem" ]; then
+  mkdir -p $HOME/.xschem
   cd $my_dir
   cp -f or1pdk/xschem/xschemrc_PTS06 $HOME/.xschem/xschemrc
   cp -f or1pdk/xschem/title_PTS06.sch $HOME/.xschem/title_PTS06.sch
+  mkdir -p $HOME /.xschem/symbols
   cp -aR ./or1pdk/xschem/symbols/* $HOME/.xschem/symbols/
+  mkdir -p $HOME /.xschem/lib
   cp -aR ./or1pdk/xschem/lib/* $HOME/.xschem/lib/
 fi
 
@@ -81,7 +83,7 @@ fi
 
 # Install GDSfactory
 # -----------------------------------
-pip install gdsfactory
+# pip install gdsfactory
 
 # Create .spiceinit
 # -----------------
@@ -90,17 +92,6 @@ pip install gdsfactory
 	echo "set ngbehavior=hsa"
 	echo "set ng_nomodcheck"
 } > "$HOME/.spiceinit"
-
-# Create iic-init.sh
-# ------------------
-if [ ! -d "$HOME/.xschem" ]; then
-	mkdir "$HOME/.xschem"
-fi
-{
-	echo "export PDK_ROOT=$PDK_ROOT"
-	echo "export PDK=$PDK"
-	echo "export STD_CELL_LIBRARY=$MY_STDCELL"
-} >> "$HOME/.bashrc"
 
 # Finished
 # --------
