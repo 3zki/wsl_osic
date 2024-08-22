@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 # ========================================================================
-# Initialization of IIC Open-Source EDA Environment for Ubuntu WSL2
+# Initialization of IIC Open-Source EDA Environment for Ubuntu WSL2 and Mac M core Series
 # This script is for use with GF180MCU.
 # ========================================================================
 
@@ -45,8 +45,24 @@ fi
 # Install GDSfactory and PDK
 # -----------------------------------
 # pip install gdsfactory
-pip install gf180
-volare enable --pdk gf180mcu $VOLARE_H
+if [ "$(uname)" == 'Darwin' ]; then
+	OS='Mac'
+	python3 -m pip install gf180 pip-autoremove --break-system-packages
+#	python3 -m pip install gdsfactory pip-autoremove --break-system-packages
+	volare enable --pdk gf180mcu $VOLARE_H
+elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
+	OS='Linux'
+	pip install gf180
+#	pip install gdsfactory
+	volare enable --pdk gf180mcu $VOLARE_H
+elif [ "$(expr substr $(uname -s) 1 10)" == 'MINGW32_NT' ]; then
+	OS='Cygwin'
+	echo "Your platform ($(uname -a)) is not supported."
+	exit 1
+else
+	echo "Your platform ($(uname -a)) is not supported."
+	exit 1
+fi
 
 # Create .spiceinit
 # -----------------
@@ -84,7 +100,20 @@ cp -f $PDK_ROOT/$PDK/libs.ref/gf180mcu_fd_sc_mcu9t5v0/gds/gf180mcu_fd_sc_mcu9t5v
 
 # Fix paths in xschemrc to point to correct PDK directory
 # -------------------------------------------------------
-sed -i 's/models\/ngspice/$env(PDK)\/libs.tech\/ngspice/g' "$HOME/.xschem/xschemrc"
+if [ "$(uname)" == 'Darwin' ]; then
+	OS='Mac'
+	sed -i '' 's/models\/ngspice/$env(PDK)\/libs.tech\/ngspice/g' "$HOME/.xschem/xschemrc"
+elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
+	OS='Linux'
+	sed -i 's/models\/ngspice/$env(PDK)\/libs.tech\/ngspice/g' "$HOME/.xschem/xschemrc"
+elif [ "$(expr substr $(uname -s) 1 10)" == 'MINGW32_NT' ]; then
+	OS='Cygwin'
+	echo "Your platform ($(uname -a)) is not supported."
+	exit 1
+else
+	echo "Your platform ($(uname -a)) is not supported."
+	exit 1
+fi
 # echo 'append XSCHEM_LIBRARY_PATH :${PDK_ROOT}/$env(PDK)/libs.tech/xschem' >> "$HOME/.xschem/xschemrc"
 echo 'set 180MCU_STDCELLS ${PDK_ROOT}/$env(PDK)/libs.ref/gf180mcu_fd_sc_mcu7t5v0/spice' >> "$HOME/.xschem/xschemrc"
 echo 'puts stderr "180MCU_STDCELLS: $180MCU_STDCELLS"' >> "$HOME/.xschem/xschemrc"
