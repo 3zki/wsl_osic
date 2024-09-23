@@ -1,6 +1,6 @@
 # wsl_osic
 
-SKY130 / GF180MCU / OpenRule1umPDK development tools for Ubuntu 22 (WSL2)
+SKY130 / GF180MCU / OpenRule1umPDK / ihp-sg13g2 / development tools for Ubuntu 22 (WSL2) and Mac M core Series
 
   1. Run `tool-install.sh`
 ```
@@ -70,3 +70,13 @@ Under construction...
 Under construction...
 
 * Xschem Libraries
+
+## ihp-sg13g2
+  4. Run `ihp-sg13g2-setup.sh`
+  5. Enjoy!
+#### Uninstall or change the PDK
+  6. If you want to change the PDK, run `uninstall.sh`
+
+#### Differences between Standard PDK
+
+Under construction...
