@@ -212,6 +212,12 @@ make clean
 sudo apt -qq install -y gnome-terminal
 systemctl --user start gnome-terminal-server
 
+
+# Fix xschem symbol path problem
+# WA for Xschem 3.4.6 RC
+# --------
+sudo sed -i "s/set curr_dirname \[pwd\]/set curr_dirname \[xschem get current_dirname\]/g" /usr/local/share/xschem/xschem.tcl
+
 # Finished
 # --------
 echo ""

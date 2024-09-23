@@ -13,7 +13,7 @@ my_path=$(realpath "$0")
 my_dir=$(dirname "$my_path")
 export SCRIPT_DIR="$my_dir"
 export PDK=sky130A
-export VOLARE_H=bdc9412b3e468c102d01b7cf6337be06ec6e9c9a
+export VOLARE_H=0fe599b2afb6708d281543108caf8310912f54af
 
 # --------
 echo ""
@@ -46,7 +46,7 @@ fi
 # -----------------------------------
 # pip install gdsfactory
 pip install sky130 flayout
-volare enable --pdk sky130 $VOLARE_H
+volare enable --pdk sky130==0.8.0 $VOLARE_H
 
 # Create .spiceinit
 # -----------------
