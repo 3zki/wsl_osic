@@ -40,7 +40,21 @@ export PDK=sky130A
 
 # for Mac
 # ------------------------
-export MAC_OS_NAME=Sonoma
+if [ "$(uname)" == 'Darwin' ]; then
+  VER=`sw_vers -productVersion | awk -F. '{ print $1 "." $2 }'`
+  case $VER in
+    "14.0")
+      export MAC_OS_NAME=Sonoma
+      ;;
+    "15.0")
+      export MAC_OS_NAME=Sequoia
+      ;;
+    *)
+      echo "Your Mac OS Version ($VER) is not supported."
+      exit 1
+      ;;
+  esac
+fi
 export TCL_VERSION=8.6.14
 export TK_VERSION=8.6.14
 export GTK_VERSION=3.24.42

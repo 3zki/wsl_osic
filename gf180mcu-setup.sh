@@ -15,6 +15,24 @@ export SCRIPT_DIR="$my_dir"
 export PDK=gf180mcuD
 export VOLARE_H=bdc9412b3e468c102d01b7cf6337be06ec6e9c9a
 
+# for Mac
+# ------------------------
+if [ "$(uname)" == 'Darwin' ]; then
+  VER=`sw_vers -productVersion | awk -F. '{ print $1 "." $2 }'`
+  case $VER in
+    "14.0")
+      export MAC_OS_NAME=Sonoma
+      ;;
+    "15.0")
+      export MAC_OS_NAME=Sequoia
+      ;;
+    *)
+      echo "Your Mac OS Version ($VER) is not supported."
+      exit 1
+      ;;
+  esac
+fi
+
 # --------
 echo ""
 echo ">>>> Initializing..."
