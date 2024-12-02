@@ -30,7 +30,8 @@ export SRC_DIR="$HOME/src"
 my_path=$(realpath "$0")
 my_dir=$(dirname "$my_path")
 export SCRIPT_DIR="$my_dir"
-export KLAYOUT_VERSION=0.29.6
+export UBUNTU_VERSION=24
+export KLAYOUT_VERSION=0.29.9
 # This selects which sky130 PDK flavor (A=sky130A, B=sky130B, all=both)  is installed
 export OPEN_PDK_ARGS="--with-sky130-variants=A"
 export PDK=sky130A
@@ -145,7 +146,7 @@ make clean
 # Install/Update KLayout
 # ---------------------
 echo ">>>> Installing KLayout-$KLAYOUT_VERSION"
-wget https://www.klayout.org/downloads/Ubuntu-22/klayout_$KLAYOUT_VERSION-1_amd64.deb
+wget https://www.klayout.org/downloads/Ubuntu-$UBUNTU_VERSION/klayout_$KLAYOUT_VERSION-1_amd64.deb
 sudo apt -qq install -y ./klayout_$KLAYOUT_VERSION-1_amd64.deb
 rm klayout_$KLAYOUT_VERSION-1_amd64.deb
 pip install docopt pandas pip-autoremove

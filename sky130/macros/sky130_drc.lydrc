@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <klayout-macro>
- <description>Run Klayout DRC (Caravel)</description>
+ <description>Run Klayout DRC (efabless)</description>
  <version>0.1</version>
  <category>drc</category>
  <prolog/>
@@ -31,7 +31,12 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-
+$feol = "true"
+$beol = "true"
+$offgrid = "true"
+$seal = "true"
+$floating_met = "true"
+$sram_exclude = "false"
 # %include ../drc/sky130A_mr.drc
 </text>
 </klayout-macro>

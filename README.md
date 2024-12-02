@@ -28,7 +28,7 @@ pip-autoremove sky130 flayout
 
 Under construction...
 * Fixed xschemrc
-* Fixed Pcells to support the latest GDSFactory
+* Fixed LVS rules
 * Added GDSFactory PCell Library
 * Fixed DRC/LVS/PEX menu
 
