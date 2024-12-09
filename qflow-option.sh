@@ -18,12 +18,14 @@ if [ ! -d "$SRC_DIR/qrouter" ]; then
 	echo ">>>> Installing qrouter"
 	git clone https://github.com/RTimothyEdwards/qrouter.git "$SRC_DIR/qrouter"
 	cd "$SRC_DIR/qrouter" || exit
-	./configure
 else
 	echo ">>>> Updating qrouter"
 	cd "$SRC_DIR/qrouter" || exit
 	git pull
 fi
+git checkout qrouter-1.4
+./configure
+git checkout
 make && sudo make install
 make clean
 
@@ -31,7 +33,7 @@ make clean
 # --------------------
 if [ ! -d "$SRC_DIR/graywolf" ]; then
 	echo ">>>> Installing graywolf"
-	sudo apt -qq install -y libgsl-dev
+	sudo apt -qq install -y libgsl-dev cmake
 	git clone https://github.com/RTimothyEdwards/graywolf.git "$SRC_DIR/graywolf"
 	cd "$SRC_DIR/graywolf" || exit
 	./configure
@@ -73,12 +75,12 @@ if [ ! -d "$SRC_DIR/qflow" ]; then
 	sudio apt -qq install -y python-tk
 	git clone https://github.com/RTimothyEdwards/qflow.git "$SRC_DIR/qflow"
 	cd "$SRC_DIR/qflow" || exit
-	./configure
 else
 	echo ">>>> Updating yosys"
 	cd "$SRC_DIR/qflow" || exit
 	git pull
 fi
+git checkout qflow-1.3
 ./configure
 make && sudo make install
 make clean
