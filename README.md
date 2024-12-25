@@ -2,6 +2,29 @@
 
 SKY130 / GF180MCU / OpenRule1umPDK development tools for Ubuntu 22 (WSL2)
 
+# Digital flow (OpenROAD)
+  1. Run `openroad-install.sh`
+```
+git clone https://github.com/3zki/wsl_osic
+cd wsl_osic
+./openroad-option.sh
+```
+  2. Restart your environment
+  3. Get `OpenROAD-flow-scripts`
+```
+git clone https://github.com/The-OpenROAD-Project/OpenROAD-flow-scripts
+```
+  4. Tool installation is already done. now you can check...
+```
+cd OpenROAD-flow-scripts
+cd flow
+make
+make gui_final
+```
+
+See OpenROAD-flow-scripts documents for more details.
+
+# Analog Tools
   1. Run `tool-install.sh`
 ```
 git clone https://github.com/3zki/wsl_osic
