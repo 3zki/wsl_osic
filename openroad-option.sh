@@ -46,7 +46,7 @@ systemctl --user start gnome-terminal-server
 # Install/update openroad
 # -----------------------
 if [ ! -d "$SRC_DIR/openROAD" ]; then
-       echo ">>>> Installing qrouter"
+       echo ">>>> Installing openROAD"
        git clone https://github.com/The-OpenROAD-Project/OpenROAD.git "$SRC_DIR/openROAD"
        cd "$SRC_DIR/openROAD" || exit
        git submodule update --init
