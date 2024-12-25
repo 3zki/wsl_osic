@@ -58,11 +58,12 @@ if [ ! -d "$SRC_DIR/yosys" ]; then
 	libboost-python-dev libboost-filesystem-dev zlib1g-dev
 	git clone https://github.com/YosysHQ/yosys.git "$SRC_DIR/yosys"
 	cd "$SRC_DIR/yosys" || exit
-	./configure
+ 	git submodule update --init
 else
 	echo ">>>> Updating yosys"
 	cd "$SRC_DIR/yosys" || exit
 	git pull
+ 	git submodule update
 fi
 make config-clang
 make -j"$(nproc)" && sudo make install
