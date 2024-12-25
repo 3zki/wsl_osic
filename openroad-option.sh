@@ -59,3 +59,17 @@ sudo dpkg -i --force-overwrite "./openroad_"$openROAD_VERSION"_amd64-ubuntu-22.0
 
 sudo apt -f -qq install -y "./openroad_"$openROAD_VERSION"_amd64-ubuntu-22.04.deb"
 rm "./openroad_"$openROAD_VERSION"_amd64-ubuntu-22.04.deb"
+
+sed -i -e '/export OPENROAD_EXE=/d' $HOME/.bashrc
+sed -i -e '/export YOSYS_EXE=/d' $HOME/.bashrc
+
+{
+	echo "export OPENROAD_EXE=$(command -v openroad)"
+	echo "export YOSYS_EXE=$(command -v yosys)"
+} >> "$HOME/.bashrc"
+
+# Finished
+# --------
+echo ""
+echo ">>>> All done. Please restart or re-read .bashrc"
+echo ""
