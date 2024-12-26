@@ -56,7 +56,8 @@ else
        git pull
        git submodule update
 fi
-sudo ./etc/DependencyInstaller.sh
+# -eqy option will install yosys, eqy and sby
+sudo ./etc/DependencyInstaller.sh -eqy
 mkdir build && cd build
 cmake ..
 make
