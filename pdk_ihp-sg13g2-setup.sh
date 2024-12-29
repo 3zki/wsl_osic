@@ -87,7 +87,7 @@ cp -rf $PDK_ROOT/$PDK/libs.tech/klayout/tech/lvs $HOME/.klayout/lvs
 cp -rf $PDK_ROOT/$PDK/libs.tech/klayout/tech/macros $HOME/.klayout/macros
 cp -rf $PDK_ROOT/$PDK/libs.tech/klayout/tech/pymacros $HOME/.klayout/pymacros
 cp -rf $PDK_ROOT/$PDK/libs.tech/klayout/python $HOME/.klayout/python
-
+ln -s $HOME/.klayout/python/pycell4klayout-api/source/python/cni/ $HOME/.klayout/python/cni
 
 # Install GDSfactory
 # -----------------------------------
