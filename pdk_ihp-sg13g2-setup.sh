@@ -58,7 +58,7 @@ export PATH=$HOME/bin:$PATH
 # Install PDK
 # -----------------------------------
 cd $PDK_ROOT
-git clone https://github.com/IHP-GmbH/IHP-Open-PDK.git
+git clone --recursive https://github.com/IHP-GmbH/IHP-Open-PDK.git
 
 cd $PDK_GIT_NAME
 pip install -r requirements.txt
