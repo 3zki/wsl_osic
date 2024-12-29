@@ -16,7 +16,6 @@ export PDK_GIT_NAME="IHP-Open-PDK"
 export PDK_NAME="ihp-sg13g2"
 export PDK="$PDK_GIT_NAME/$PDK_NAME"
 export OPENVAF_VERSION="_23_5_0_"
-export KLAYOUT_VERSION="0.29.4"
 
 # --------
 echo ""
@@ -27,6 +26,8 @@ if [ "$(uname)" == 'Darwin' ]; then
 	OS='Mac'
 	echo "Your platform ($(uname -a)) is not supported."
 	exit 1
+elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
+	OS='Linux'
 elif [ "$(expr substr $(uname -s) 1 10)" == 'MINGW32_NT' ]; then
 	OS='Cygwin'
 	echo "Your platform ($(uname -a)) is not supported."
@@ -36,22 +37,13 @@ else
 	exit 1
 fi
 
-# Install/Update KLayout
-# ---------------------
-echo ">>>> Installing KLayout-$KLAYOUT_VERSION"
-wget https://www.klayout.org/downloads/Ubuntu-22/klayout_$KLAYOUT_VERSION-1_amd64.deb
-sudo apt remove -y klayout
-sudo apt -qq install -y ./klayout_$KLAYOUT_VERSION-1_amd64.deb
-rm klayout_$KLAYOUT_VERSION-1_amd64.deb
-
 # Delete previous PDK
 # ---------------------------------------------
 if [ -d "$PDK_ROOT" ]; then
 	echo ">>>> Delete previous PDK"
-	sudo rm -rf "$PDK_ROOT"
-	sudo mkdir "$PDK_ROOT"
-	sudo chown "$USER:staff" "$PDK_ROOT"
+	rm -rf "$PDK_ROOT"
 fi
+mkdir "$PDK_ROOT"
 
 # Install OpenVAF
 # -----------------------------------
@@ -80,21 +72,22 @@ export PYTHONPYCACHEPREFIX=/tmp
 # ----------------------------------
 if [ ! -d "$HOME/.klayout" ]; then
 	mkdir $HOME/.klayout
-#	mkdir -p $HOME/.klayout/tech/$PDK_NAME/
-#	cp -f $PDK_ROOT/$PDK/libs.tech/klayout/tech/sg13g2.lyp $HOME/.klayout/tech/$PDK_NAME/
-#	cp -f $PDK_ROOT/$PDK/libs.tech/klayout/tech/sg13g2.lyt $HOME/.klayout/tech/$PDK_NAME/
-	mkdir -p $HOME/.klayout/tech/
-	cp -f $PDK_ROOT/$PDK/libs.tech/klayout/tech/sg13g2.lyp $HOME/.klayout/tech/
-	cp -f $PDK_ROOT/$PDK/libs.tech/klayout/tech/sg13g2.lyt $HOME/.klayout/tech/
-
-	cp -rf $PDK_ROOT/$PDK/libs.tech/klayout/tech/drc $HOME/.klayout/drc
-	cp -rf $PDK_ROOT/$PDK/libs.tech/klayout/tech/lvs $HOME/.klayout/lvs
-	cp -rf $PDK_ROOT/$PDK/libs.tech/klayout/tech/macros $HOME/.klayout/macros
-	cp -rf $PDK_ROOT/$PDK/libs.tech/klayout/tech/pymacros $HOME/.klayout/pymacros
-	cp -rf $PDK_ROOT/$PDK/libs.tech/klayout/python $HOME/.klayout/python
-
-	mkdir $HOME/.klayout/libraries
 fi
+if [ ! -d "$HOME/.klayout/tech" ]; then
+	mkdir -p $HOME/.klayout/tech/
+fi
+if [ ! -d "$HOME/.klayout/libraries" ]; then
+	mkdir -p $HOME/.klayout/libraries
+fi
+cp -f $PDK_ROOT/$PDK/libs.tech/klayout/tech/sg13g2.lyp $HOME/.klayout/tech/
+cp -f $PDK_ROOT/$PDK/libs.tech/klayout/tech/sg13g2.lyt $HOME/.klayout/tech/
+
+cp -rf $PDK_ROOT/$PDK/libs.tech/klayout/tech/drc $HOME/.klayout/drc
+cp -rf $PDK_ROOT/$PDK/libs.tech/klayout/tech/lvs $HOME/.klayout/lvs
+cp -rf $PDK_ROOT/$PDK/libs.tech/klayout/tech/macros $HOME/.klayout/macros
+cp -rf $PDK_ROOT/$PDK/libs.tech/klayout/tech/pymacros $HOME/.klayout/pymacros
+cp -rf $PDK_ROOT/$PDK/libs.tech/klayout/python $HOME/.klayout/python
+
 
 # Install GDSfactory
 # -----------------------------------
@@ -117,11 +110,11 @@ fi
 
 # Create .spiceinit
 # -----------------
+rm $HOME/.spiceinit
+cp -f $PDK_ROOT/$PDK/libs.tech/ngspice/.spiceinit $HOME/
 {
 	echo "set num_threads=$(nproc)"
-	echo "set ngbehavior=hsa"
-	echo "set ng_nomodcheck"
-} > "$HOME/.spiceinit"
+} >> "$HOME/.spiceinit"
 
 # Create iic-init.sh
 # ------------------
@@ -138,7 +131,8 @@ fi
 
 # Copy various things
 # -------------------
-cp -f $PDK_ROOT/$PDK/libs.tech/xschem/xschemrc $HOME/.xschem
+rm $HOME/.xschem/xschemrc
+cp -f $PDK_ROOT/$PDK/libs.tech/xschem/xschemrc $HOME/.xschem/
 
 # Fix paths in xschemrc to point to correct PDK directory
 # -------------------------------------------------------

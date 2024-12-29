@@ -13,14 +13,13 @@ my_dir=$(dirname "$my_path")
 export SCRIPT_DIR="$my_dir"
 
 # for Mac
-# ------------------------
 if [ "$(uname)" == 'Darwin' ]; then
-  VER=`sw_vers -productVersion | awk -F. '{ print $1 "." $2 }'`
+  VER=`sw_vers -productVersion | awk -F. '{ print $1 }'`
   case $VER in
-    "14.0")
+    "14")
       export MAC_OS_NAME=Sonoma
       ;;
-    "15.0")
+    "15")
       export MAC_OS_NAME=Sequoia
       ;;
     *)
@@ -36,16 +35,6 @@ echo ""
 echo ">>>> Initializing..."
 echo ""
 
-# Copy KLayout Configurations
-# ----------------------------------
-if [ ! -d "$HOME/.klayout" ]; then
-	# cp -rf klayout $HOME/.klayout
-	mkdir $HOME/.klayout
-	mkdir $HOME/.klayout/salt
-	mkdir $HOME/.klayout/macros
-	# mkdir $home/.klayout/libraries
-fi
-
 # Delete previous PDK
 # ---------------------------------------------
 if [ -d "$PDK_ROOT" ]; then
@@ -55,25 +44,34 @@ if [ -d "$PDK_ROOT" ]; then
 	sudo chown "$USER:staff" "$PDK_ROOT"
 fi
 
-# Install PDK
-# -----------------------------------
+# Copy xschem Configurations
+# ----------------------------------
+if [ ! -d "$HOME/.xschem/symbols" ]; then
+  mkdir -p $HOME/.xschem/symbols
+  mkdir -p $HOME/.xschem/lib
+fi
+cd $my_dir
+cp -f or1pdk/xschem/xschemrc_PTS06 $HOME/.xschem/xschemrc
+cp -f or1pdk/xschem/title_PTS06.sch $HOME/.xschem/title_PTS06.sch
+cp -aR ./or1pdk/xschem/symbols/* $HOME/.xschem/symbols/
+cp -aR ./or1pdk/xschem/lib/* $HOME/.xschem/lib/
+
+
+# Copy KLayout Configurations
+# ----------------------------------
+if [ ! -d "$HOME/.klayout" ]; then
+	# cp -rf klayout $HOME/.klayout
+	mkdir $HOME/.klayout
+	mkdir $HOME/.klayout/salt
+	mkdir $HOME/.klayout/macros
+	mkdir $home/.klayout/libraries
+fi
+cd $my_dir
 cp -f or1pdk/or1_lvs_make_stdcells.lym $HOME/.klayout/macros/or1_lvs_make_stdcells.lym
 cp -f or1pdk/or1_lvs_make.lym $HOME/.klayout/macros/or1_lvs_make.lym
 cp -f or1pdk/klayoutrc $HOME/.klayout/klayoutrc
 # cp -aR or1pdk/GDS/PTS06/* $HOME/.klayout/libraries
 
-
-
-if [ ! -d "$HOME/.xschem" ]; then
-	mkdir -p $HOME/.xschem
-	cd $my_dir
-	cp -f or1pdk/xschem/xschemrc_PTS06 $HOME/.xschem/xschemrc
-	cp -f or1pdk/xschem/title_PTS06.sch $HOME/.xschem/title_PTS06.sch
-	mkdir -p $HOME/.xschem/symbols
-	cp -aR ./or1pdk/xschem/symbols/* $HOME/.xschem/symbols/
-	mkdir -p $HOME/.xschem/lib
-	cp -aR ./or1pdk/xschem/lib/* $HOME/.xschem/lib/
-fi
 
 if [ ! -d "$SRC_DIR/OpenRule1um" ]; then
 	cd $SRC_DIR

@@ -16,14 +16,13 @@ export PDK=gf180mcuD
 export VOLARE_H=bdc9412b3e468c102d01b7cf6337be06ec6e9c9a
 
 # for Mac
-# ------------------------
 if [ "$(uname)" == 'Darwin' ]; then
-  VER=`sw_vers -productVersion | awk -F. '{ print $1 "." $2 }'`
+  VER=`sw_vers -productVersion | awk -F. '{ print $1 }'`
   case $VER in
-    "14.0")
+    "14")
       export MAC_OS_NAME=Sonoma
       ;;
-    "15.0")
+    "15")
       export MAC_OS_NAME=Sequoia
       ;;
     *)

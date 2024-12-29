@@ -4,23 +4,23 @@ SKY130 / GF180MCU / OpenRule1umPDK / ihp-sg13g2 / development tools for Ubuntu 2
 
   1. Run `tool-install.sh`
 ```
-git clone https://github.com/3zki/wsl_osic
-cd wsl_osic
-./tool-install.sh
+git clone https://github.com/noritsuna/wsl_osic_4_mac
+cd wsl_osic_4_mac
+./eda-setup.sh
 ```
 
   2. Restart your environment
   3. Choose the PDK you want to use...
 
 ## SKY130
-  4. Run `sky130-setup.sh`
+  4. Run `pdk_sky130-setup.sh`
   5. Enjoy!
 #### Uninstall or change the PDK
   6. If you want to change the PDK, run `uninstall.sh`
   7. Delete pip packages: `sky130` and `flayout`.
      pip-autoremove might be useful:
 ```
-pip-autoremove sky130 flayout
+pip-auto remove sky130 flayout
 ```
   8. Now you can change the PDK
 
@@ -33,7 +33,7 @@ Under construction...
 * Fixed DRC/LVS/PEX menu
 
 ## GF180MCU
-  4. Run `gf180mcu-setup.sh`
+  4. Run `pdk_gf180mcu-setup.sh`
   5. Enjoy!
 #### Uninstall or change the PDK
   6. If you want to change the PDK, run `uninstall.sh`
@@ -59,7 +59,7 @@ Under construction...
   * Magic LVS cannot recognize V5_XTOR therefore menu replaces "05v0" with "06v0" in source netlist
 
 ## OpenRule1umPDK (PTS06)
-  4. Run `or1pdk-setup.sh`
+  4. Run `pdk_or1pdk-setup.sh`
   5. Enjoy!
 #### Uninstall or change the PDK
   6. If you want to change the PDK, run `uninstall.sh`
@@ -72,7 +72,7 @@ Under construction...
 * Xschem Libraries
 
 ## ihp-sg13g2
-  4. Run `ihp-sg13g2-setup.sh`
+  4. Run `pdk_ihp-sg13g2-setup.sh`
   5. Enjoy!
 #### Uninstall or change the PDK
   6. If you want to change the PDK, run `uninstall.sh`
