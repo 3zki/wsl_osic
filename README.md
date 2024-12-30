@@ -50,10 +50,10 @@ pip-autoremove sky130 flayout
 #### Differences between Standard PDK
 
 Under construction...
-* Fixed xschemrc
-* Fixed LVS rules
-* Added GDSFactory PCell Library
-* Fixed DRC/LVS/PEX menu
+* Modify xschemrc
+* Modify LVS rules
+* Add GDSFactory PCell Library
+* Add DRC/LVS/PEX menu
 
 ## GF180MCU
   4. Run `gf180mcu-setup.sh`
@@ -71,12 +71,12 @@ pip-autoremove gf180
 
 Under construction...
 
-* Fixed xschemrc
-* Changed color scheme table in GF180MCU technology files
-* Added undefined but used layers such as Nwell_Label in mcu7t5v0 standard cells
-  * Changed LVS rules to recognize Nwell_Label, LVPwell_Label and Pad_Label
+* Modify xschemrc
+* Change color scheme table in GF180MCU technology files
+* Add undefined but used layers such as Nwell_Label in mcu7t5v0 standard cells
+  * Change LVS rules to recognize Nwell_Label, LVPwell_Label
 
-* Fixed Pcells to support the latest GDSFactory
+* Modify Pcells to support the latest GDSFactory
 
 * Add DRC/LVS/PEX menu
   * Magic LVS cannot recognize V5_XTOR therefore menu replaces "05v0" with "06v0" in source netlist
