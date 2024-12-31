@@ -53,13 +53,13 @@ python3 -m pip install --upgrade --no-cache-dir volare
 if [ ! -d "$HOME/.klayout" ]; then
 	# cp -rf klayout $HOME/.klayout
 	mkdir $HOME/.klayout
-	cp -f sky130/klayoutrc $HOME/.klayout
-	cp -rf sky130/macros $HOME/.klayout/macros
-	cp -rf sky130/drc $HOME/.klayout/drc
-	cp -rf sky130/lvs $HOME/.klayout/lvs
-	cp -rf sky130/pymacros $HOME/.klayout/pymacros
 	mkdir $HOME/.klayout/libraries
 fi
+cp -f sky130/klayoutrc $HOME/.klayout
+cp -rf sky130/macros $HOME/.klayout/macros
+cp -rf sky130/drc $HOME/.klayout/drc
+cp -rf sky130/lvs $HOME/.klayout/lvs
+cp -rf sky130/pymacros $HOME/.klayout/pymacros
 
 # Delete previous PDK
 # ---------------------------------------------
