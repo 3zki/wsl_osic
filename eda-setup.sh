@@ -419,9 +419,12 @@ fi
 # -----------------------------------
 if [ "$(uname)" == 'Darwin' ]; then
   OS='Mac'
+  python3 -m pip install ninja pip-autoremove --break-system-packages
   python3 -m pip install gdsfactory pip-autoremove --break-system-packages
 elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
   OS='Linux'
+  sudo apt install libcurl4-openssl-dev
+  pip install ninja
   pip install gdsfactory
 elif [ "$(expr substr $(uname -s) 1 10)" == 'MINGW32_NT' ]; then
   OS='Cygwin'
