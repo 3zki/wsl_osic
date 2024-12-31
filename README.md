@@ -1,6 +1,6 @@
 # wsl_osic
 
-SKY130 / GF180MCU / OpenRule1umPDK / ihp-sg13g2 / development tools for Ubuntu 22 (WSL2) and Mac M core Series
+SKY130&TinyTapeout for analog / GF180MCU / OpenRule1umPDK / ihp-sg13g2 / development tools for Ubuntu 22 (WSL2) and Mac M core Series
 
   1. Run `tool-install.sh`
 ```
@@ -12,9 +12,13 @@ cd wsl_osic_4_mac
   2. Restart your environment
   3. Choose the PDK you want to use...
 
-## SKY130
+## SKY130 and TinyTapeout by SKY130 for analog
   4. Run `pdk_sky130-setup.sh`
   5. Enjoy!
+
+#### Frame for TinyTapeout by SKY130
+* [Frame GDS file](TT/gds/tt_um_username_projectname.gds)
+
 #### Uninstall or change the PDK
   6. If you want to change the PDK, run `uninstall.sh`
   7. Delete pip packages: `sky130` and `flayout`.
