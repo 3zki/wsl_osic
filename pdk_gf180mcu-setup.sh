@@ -56,6 +56,7 @@ if [ ! -d "$HOME/.klayout" ]; then
 	mkdir $HOME/.klayout
 	mkdir $HOME/.klayout/libraries
 fi
+cd $my_dir
 cp -f gf180mcu/klayoutrc $HOME/.klayout
 cp -rf gf180mcu/macros $HOME/.klayout/macros
 cp -rf gf180mcu/tech $HOME/.klayout/tech

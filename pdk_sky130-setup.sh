@@ -55,11 +55,12 @@ if [ ! -d "$HOME/.klayout" ]; then
 	mkdir $HOME/.klayout
 	mkdir $HOME/.klayout/libraries
 fi
+cd $my_dir
 cp -f sky130/klayoutrc $HOME/.klayout
 cp -rf sky130/macros $HOME/.klayout/macros
-cp -rf sky130/drc $HOME/.klayout/drc
+# cp -rf sky130/drc $HOME/.klayout/drc
 cp -rf sky130/lvs $HOME/.klayout/lvs
-cp -rf sky130/pymacros $HOME/.klayout/pymacros
+# cp -rf sky130/pymacros $HOME/.klayout/pymacros
 
 # Delete previous PDK
 # ---------------------------------------------
@@ -117,17 +118,18 @@ fi
 export PDK_ROOT=$PDK_ROOT
 export PDK=$PDK
 export STD_CELL_LIBRARY=$MY_STDCELL
+cd $my_dir
 cp -f $PDK_ROOT/$PDK/libs.tech/xschem/xschemrc $HOME/.xschem
 cp -f $PDK_ROOT/$PDK/libs.tech/magic/$PDK.magicrc $HOME/.magicrc
-# cp -rf $PDK_ROOT/$PDK/libs.tech/klayout/drc $HOME/.klayout/drc
+cp -rf $PDK_ROOT/$PDK/libs.tech/klayout/drc $HOME/.klayout/drc
 # cp -rf $PDK_ROOT/$PDK/libs.tech/klayout/lvs $HOME/.klayout/lvs
 # cp -rf $PDK_ROOT/$PDK/libs.tech/klayout/pymacros $HOME/.klayout/pymacros
 # cp -rf $PDK_ROOT/$PDK/libs.tech/klayout/scripts $HOME/.klayout/scripts
 mkdir $HOME/.klayout/tech/
 mkdir $HOME/.klayout/tech/sky130
-cp -f $PDK_ROOT/$PDK/libs.tech/klayout/tech/$PDK.lyp $HOME/.klayout/tech/sky130/sky130.lyp
-cp -f $PDK_ROOT/$PDK/libs.tech/klayout/tech/$PDK.lyt $HOME/.klayout/tech/sky130/sky130.lyt
-cp -f $PDK_ROOT/$PDK/libs.tech/klayout/tech/$PDK.map $HOME/.klayout/tech/sky130/sky130.map
+cp -f $PDK_ROOT/$PDK/libs.tech/klayout/tech/$PDK.lyp $HOME/.klayout/tech/sky130/$PDK.lyp
+cp -f $PDK_ROOT/$PDK/libs.tech/klayout/tech/$PDK.lyt $HOME/.klayout/tech/sky130/$PDK.lyt
+cp -f $PDK_ROOT/$PDK/libs.tech/klayout/tech/$PDK.map $HOME/.klayout/tech/sky130/$PDK.map
 cp -f $PDK_ROOT/$PDK/libs.ref/sky130_fd_pr/gds/sky130_fd_pr.gds $HOME/.klayout/libraries/
 cp -f $PDK_ROOT/$PDK/libs.ref/sky130_fd_sc_hd/gds/sky130_fd_sc_hd.gds $HOME/.klayout/libraries/
 cp -f $PDK_ROOT/$PDK/libs.ref/sky130_fd_sc_hvl/gds/sky130_fd_sc_hvl.gds $HOME/.klayout/libraries/
