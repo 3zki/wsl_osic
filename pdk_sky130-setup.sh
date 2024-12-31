@@ -104,14 +104,33 @@ fi
 
 # Create iic-init.sh
 # ------------------
+# Create iic-init.sh
+# ------------------
 if [ ! -d "$HOME/.xschem" ]; then
 	mkdir "$HOME/.xschem"
 fi
-{
-	echo "export PDK_ROOT=$PDK_ROOT"
-	echo "export PDK=$PDK"
-	echo "export STD_CELL_LIBRARY=$MY_STDCELL"
-} >> "$HOME/.bashrc"
+if [ "$(uname)" == 'Darwin' ]; then
+	OS='Mac'
+	{
+		echo "export PDK_ROOT=$PDK_ROOT"
+		echo "export PDK=$PDK"
+		echo "export STD_CELL_LIBRARY=$MY_STDCELL"
+	} >> "$HOME/.zshrc"
+elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
+	OS='Linux'
+	{
+		echo "export PDK_ROOT=$PDK_ROOT"
+		echo "export PDK=$PDK"
+		echo "export STD_CELL_LIBRARY=$MY_STDCELL"
+	} >> "$HOME/.bashrc"
+elif [ "$(expr substr $(uname -s) 1 10)" == 'MINGW32_NT' ]; then
+	OS='Cygwin'
+	echo "Your platform ($(uname -a)) is not supported."
+	exit 1
+else
+	echo "Your platform ($(uname -a)) is not supported."
+	exit 1
+fi
 
 # Copy various things
 # -------------------

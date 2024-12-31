@@ -11,9 +11,9 @@ rm -rf $HOME/.xschem
 rm -rf $HOME/.gaw
 if [ "$(uname)" == 'Darwin' ]; then
 	OS='Mac'
-	sed -i -e '' '/export PDK_ROOT=/d' $HOME/.bashrc
-	sed -i -e '' '/export PDK=/d' $HOME/.bashrc
-	sed -i -e '' '/export STD_CELL_LIBRARY=/d' $HOME/.bashrc
+	sed -i -e '' '/export PDK_ROOT=/d' $HOME/.zshrc
+	sed -i -e '' '/export PDK=/d' $HOME/.zshrc
+	sed -i -e '' '/export STD_CELL_LIBRARY=/d' $HOME/.zshrc
 elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
 	OS='Linux'
 	sed -i -e '/export PDK_ROOT=/d' $HOME/.bashrc
