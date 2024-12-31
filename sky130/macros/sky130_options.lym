@@ -41,11 +41,202 @@
   mw = RBA::MainWindow::instance
 
   # create a toolbar skymenu
+  mw.menu.insert_menu("skymenu.end", "drc_menu", "efabless DRC Options")
   mw.menu.insert_menu("skymenu.end", "lvs_menu", "Klayout LVS Options")
   mw.menu.insert_menu("skymenu.end", "lvs_magic_menu", "Magic LVS Options")
   mw.menu.insert_menu("skymenu.end", "pex_magic_menu", "Magic PEX-RC Options")
   mw.menu.insert_menu("skymenu.end", "pex_c_magic_menu", "Magic PEX-C Options")
   mw.menu.insert_separator("skymenu.pex_c_magic_menu+", "name2")
+
+  #####################################################################################
+  # Adding Klayout DRC (efabless) options
+  #####################################################################################
+  
+  #1 FEOL
+  feol_action = RBA::Action::new
+  feol_action.title = "Frontend checks"
+  feol_action.checkable=(true)
+  File.open(File.expand_path File.dirname(__FILE__) + "/sky130_drc.lydrc", 'w') { |f| 
+    text = File.read(f)
+    if text.include?("$feol = \"true\"")
+      feol_action.checked=(true)
+    else
+      feol_action.checked=(false)
+    end
+  }
+  feol_action.on_triggered do
+    File.open(File.expand_path File.dirname(__FILE__) + "/sky130_drc.lydrc", 'w') { |f| 
+      text = File.read(f)
+      if feol_action.is_checked?
+        feol_bool = "true"
+      else
+        feol_bool = "false"
+      end
+      if text.include?("$feol")
+        new_contents = text.gsub(/\$feol = \".*\"/, '$feol = "'+ feol_bool + '"')
+        File.open(f, "w") {|file| file.puts new_contents }
+      else
+        new_contents = text.gsub(/(\# \%.*drc)/m, '$feol = "'+ feol_bool +'"' +"\n"+'\1')
+        File.open(f, "w") {|file| file.puts new_contents }
+      end
+    }
+  end
+  mw.menu.insert_item("skymenu.drc_menu.end", "feol", feol_action)
+  
+  #2 BEOL
+  beol_action = RBA::Action::new
+  beol_action.title = "Backend checks"
+  beol_action.checkable=(true)
+  File.open(File.expand_path File.dirname(__FILE__) + "/sky130_drc.lydrc", 'w') { |f| 
+    text = File.read(f)
+    if text.include?("$beol = \"true\"")
+      beol_action.checked=(true)
+    else
+      beol_action.checked=(false)
+    end
+  }
+  beol_action.on_triggered do
+    File.open(File.expand_path File.dirname(__FILE__) + "/sky130_drc.lydrc", 'w') { |f| 
+      text = File.read(f)
+      if beol_action.is_checked?
+        beol_bool = "true"
+      else
+        beol_bool = "false"
+      end
+      if text.include?("$beol")
+        new_contents = text.gsub(/\$beol = \".*\"/, '$beol = "'+ beol_bool + '"')
+        File.open(f, "w") {|file| file.puts new_contents }
+      else
+        new_contents = text.gsub(/(\# \%.*drc)/m, '$beol = "'+ beol_bool +'"' +"\n"+'\1')
+        File.open(f, "w") {|file| file.puts new_contents }
+      end
+    }
+  end
+  mw.menu.insert_item("skymenu.drc_menu.end", "beol", beol_action)
+  
+  #3 OFFGRID
+  offgrid_action = RBA::Action::new
+  offgrid_action.title = "Offgrid checks"
+  offgrid_action.checkable=(true)
+  File.open(File.expand_path File.dirname(__FILE__) + "/sky130_drc.lydrc", 'w') { |f| 
+    text = File.read(f)
+    if text.include?("$offgrid = \"true\"")
+      offgrid_action.checked=(true)
+    else
+      offgrid_action.checked=(false)
+    end
+  }
+  offgrid_action.on_triggered do
+    File.open(File.expand_path File.dirname(__FILE__) + "/sky130_drc.lydrc", 'w') { |f| 
+      text = File.read(f)
+      if offgrid_action.is_checked?
+        offgrid_bool = "true"
+      else
+        offgrid_bool = "false"
+      end
+      if text.include?("$offgrid")
+        new_contents = text.gsub(/\$offgrid = \".*\"/, '$offgrid = "'+ offgrid_bool + '"')
+        File.open(f, "w") {|file| file.puts new_contents }
+      else
+        new_contents = text.gsub(/(\# \%.*drc)/m, '$offgrid = "'+ offgrid_bool +'"' +"\n"+'\1')
+        File.open(f, "w") {|file| file.puts new_contents }
+      end
+    }
+  end
+  mw.menu.insert_item("skymenu.drc_menu.end", "offgrid", offgrid_action)
+  
+  #4 SEAL
+  seal_action = RBA::Action::new
+  seal_action.title = "Seal ring checks"
+  seal_action.checkable=(true)
+  File.open(File.expand_path File.dirname(__FILE__) + "/sky130_drc.lydrc", 'w') { |f| 
+    text = File.read(f)
+    if text.include?("$seal = \"true\"")
+      seal_action.checked=(true)
+    else
+      seal_action.checked=(false)
+    end
+  }
+  seal_action.on_triggered do
+    File.open(File.expand_path File.dirname(__FILE__) + "/sky130_drc.lydrc", 'w') { |f| 
+      text = File.read(f)
+      if seal_action.is_checked?
+        seal_bool = "true"
+      else
+        seal_bool = "false"
+      end
+      if text.include?("$seal")
+        new_contents = text.gsub(/\$seal = \".*\"/, '$seal = "'+ seal_bool + '"')
+        File.open(f, "w") {|file| file.puts new_contents }
+      else
+        new_contents = text.gsub(/(\# \%.*drc)/m, '$seal = "'+ seal_bool +'"' +"\n"+'\1')
+        File.open(f, "w") {|file| file.puts new_contents }
+      end
+    }
+  end
+  mw.menu.insert_item("skymenu.drc_menu.end", "seal", seal_action)
+  
+  #5 floating_met
+  floating_met_action = RBA::Action::new
+  floating_met_action.title = "Floating metal checks"
+  floating_met_action.checkable=(true)
+  File.open(File.expand_path File.dirname(__FILE__) + "/sky130_drc.lydrc", 'w') { |f| 
+    text = File.read(f)
+    if text.include?("$floating_met = \"true\"")
+      floating_met_action.checked=(true)
+    else
+      floating_met_action.checked=(false)
+    end
+  }
+  floating_met_action.on_triggered do
+    File.open(File.expand_path File.dirname(__FILE__) + "/sky130_drc.lydrc", 'w') { |f| 
+      text = File.read(f)
+      if floating_met_action.is_checked?
+        floating_met_bool = "true"
+      else
+        floating_met_bool = "false"
+      end
+      if text.include?("$floating_met")
+        new_contents = text.gsub(/\$floating_met = \".*\"/, '$floating_met = "'+ floating_met_bool + '"')
+        File.open(f, "w") {|file| file.puts new_contents }
+      else
+        new_contents = text.gsub(/(\# \%.*drc)/m, '$floating_met = "'+ floating_met_bool +'"' +"\n"+'\1')
+        File.open(f, "w") {|file| file.puts new_contents }
+      end
+    }
+  end
+  mw.menu.insert_item("skymenu.drc_menu.end", "floating_met", floating_met_action)
+  
+  #6 sram_exclude
+  sram_exclude_action = RBA::Action::new
+  sram_exclude_action.title = "Exclude SRAM checks"
+  sram_exclude_action.checkable=(true)
+  File.open(File.expand_path File.dirname(__FILE__) + "/sky130_drc.lydrc", 'w') { |f| 
+    text = File.read(f)
+    if text.include?("$sram_exclude = \"true\"")
+      sram_exclude_action.checked=(true)
+    else
+      sram_exclude_action.checked=(false)
+    end
+  }
+  sram_exclude_action.on_triggered do
+    File.open(File.expand_path File.dirname(__FILE__) + "/sky130_drc.lydrc", 'w') { |f| 
+      text = File.read(f)
+      if sram_exclude_action.is_checked?
+        sram_exclude_bool = "true"
+      else
+        sram_exclude_bool = "false"
+      end
+      if text.include?("$sram_exclude")
+        new_contents = text.gsub(/\$sram_exclude = \".*\"/, '$sram_exclude = "'+ sram_exclude_bool + '"')
+        File.open(f, "w") {|file| file.puts new_contents }
+      else
+        new_contents = text.gsub(/(\# \%.*drc)/m, '$sram_exclude = "'+ sram_exclude_bool +'"' +"\n"+'\1')
+        File.open(f, "w") {|file| file.puts new_contents }
+      end
+    }
+  end
+  mw.menu.insert_item("skymenu.drc_menu.end", "sram_exclude", sram_exclude_action)
 
   #####################################################################################
   # Adding Klayout LVS options
