@@ -37,6 +37,17 @@ echo ""
 echo ">>>> Initializing..."
 echo ""
 
+echo ">>>> Installing Volare"
+if [ ! -d "$SRC_DIR/volare" ]; then
+	git clone https://github.com/efabless/volare.git "$SRC_DIR/volare"
+	cd "$SRC_DIR/volare" || exit
+else
+	echo ">>>> Updating xschem"
+	cd "$SRC_DIR/volare" || exit
+	git pull
+fi
+python3 -m pip install --upgrade --no-cache-dir volare
+
 # Copy KLayout Configurations
 # ----------------------------------
 if [ ! -d "$HOME/.klayout" ]; then
