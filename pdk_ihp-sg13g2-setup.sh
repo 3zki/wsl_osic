@@ -37,6 +37,30 @@ else
 	exit 1
 fi
 
+# for Mac
+if [ "$(uname)" == 'Darwin' ]; then
+  VER=`sw_vers -productVersion | awk -F. '{ print $1 }'`
+  case $VER in
+    "14")
+      export MAC_OS_NAME=Sonoma
+      ;;
+    "15")
+      export MAC_OS_NAME=Sequoia
+      ;;
+    *)
+      echo "Your Mac OS Version ($VER) is not supported."
+      exit 1
+      ;;
+  esac
+  export MAC_ARCH_NAME=`uname -m`
+fi
+export TCL_VERSION=8.6.14
+export TK_VERSION=8.6.14
+export GTK_VERSION=3.24.42
+export CC_VERSION=-14
+export CXX_VERSION=-14
+
+
 # Delete previous PDK
 # ---------------------------------------------
 if [ -d "$PDK_ROOT" ]; then
@@ -89,9 +113,6 @@ cp -rf $PDK_ROOT/$PDK/libs.tech/klayout/tech/pymacros $HOME/.klayout/pymacros
 cp -rf $PDK_ROOT/$PDK/libs.tech/klayout/python $HOME/.klayout/python
 ln -s $HOME/.klayout/python/pycell4klayout-api/source/python/cni/ $HOME/.klayout/python/cni
 
-# Install GDSfactory
-# -----------------------------------
-pip install gdsfactory
 
 # Install OpenEMS
 # -----------------------------------
@@ -107,6 +128,7 @@ else
 	git pull --recurse-submodules
 fi
 ./update_openEMS.sh ~/opt/openEMS --with-hyp2mat --with-CTB --python
+
 
 # Create .spiceinit
 # -----------------

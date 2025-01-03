@@ -1,6 +1,6 @@
 #!/bin/bash
 # ========================================================================
-# Initialization of IIC Open-Source EDA Environment for Ubuntu WSL2 and Mac M core Series
+# Initialization of IIC Open-Source EDA Environment for Ubuntu WSL2 and macOS.
 # This script is for use with OpenRule1umPDK.
 # ========================================================================
 
@@ -27,7 +27,13 @@ if [ "$(uname)" == 'Darwin' ]; then
       exit 1
       ;;
   esac
+  export MAC_ARCH_NAME=`uname -m`
 fi
+export TCL_VERSION=8.6.14
+export TK_VERSION=8.6.14
+export GTK_VERSION=3.24.42
+export CC_VERSION=-14
+export CXX_VERSION=-14
 
 
 # --------
@@ -96,22 +102,6 @@ else
 	cp -aR AnagixLoader $HOME/.klayout/salt/
 fi
 
-# Install GDSfactory
-# -----------------------------------
-if [ "$(uname)" == 'Darwin' ]; then
-	OS='Mac'
-	python3 -m pip install gdsfactory pip-autoremove --break-system-packages
-elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
-	OS='Linux'
-	pip install gdsfactory
-elif [ "$(expr substr $(uname -s) 1 10)" == 'MINGW32_NT' ]; then
-	OS='Cygwin'
-	echo "Your platform ($(uname -a)) is not supported."
-	exit 1
-else
-	echo "Your platform ($(uname -a)) is not supported."
-	exit 1
-fi
 
 # Create .spiceinit
 # -----------------

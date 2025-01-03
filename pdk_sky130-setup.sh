@@ -1,6 +1,6 @@
 #!/bin/bash
 # ========================================================================
-# Initialization of IIC Open-Source EDA Environment for Ubuntu WSL2 and Mac M core Series
+# Initialization of IIC Open-Source EDA Environment for Ubuntu WSL2 and macOS.
 # This script is for use with SKY130.
 # ========================================================================
 
@@ -30,7 +30,13 @@ if [ "$(uname)" == 'Darwin' ]; then
       exit 1
       ;;
   esac
+  export MAC_ARCH_NAME=`uname -m`
 fi
+export TCL_VERSION=8.6.14
+export TK_VERSION=8.6.14
+export GTK_VERSION=3.24.42
+export CC_VERSION=-14
+export CXX_VERSION=-14
 
 # --------
 echo ""
@@ -71,17 +77,15 @@ if [ -d "$PDK_ROOT" ]; then
 	sudo chown "$USER:staff" "$PDK_ROOT"
 fi
 
-# Install GDSfactory and PDK
+# Install PDK
 # -----------------------------------
 if [ "$(uname)" == 'Darwin' ]; then
 	OS='Mac'
 	python3 -m pip install sky130 flayout pip-autoremove --break-system-packages
-#	python3 -m pip install gdsfactory pip-autoremove --break-system-packages
 	volare enable --pdk sky130 $VOLARE_H
 elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
 	OS='Linux'
 	pip install sky130 flayout
-#	pip install gdsfactory
 	volare enable --pdk sky130 $VOLARE_H
 elif [ "$(expr substr $(uname -s) 1 10)" == 'MINGW32_NT' ]; then
 	OS='Cygwin'

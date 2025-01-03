@@ -1,6 +1,6 @@
 #!/bin/bash
 # ========================================================================
-# Initialization of IIC Open-Source EDA Environment for Ubuntu WSL2 and Mac M core Series
+# Initialization of IIC Open-Source EDA Environment for Ubuntu WSL2 and macOS.
 # This script is for use with GF180MCU.
 # ========================================================================
 
@@ -30,7 +30,14 @@ if [ "$(uname)" == 'Darwin' ]; then
       exit 1
       ;;
   esac
+  export MAC_ARCH_NAME=`uname -m`
 fi
+export TCL_VERSION=8.6.14
+export TK_VERSION=8.6.14
+export GTK_VERSION=3.24.42
+export CC_VERSION=-14
+export CXX_VERSION=-14
+
 
 # --------
 echo ""
@@ -72,18 +79,16 @@ if [ -d "$PDK_ROOT" ]; then
 	sudo chown "$USER:staff" "$PDK_ROOT"
 fi
 
-# Install GDSfactory and PDK
+# Install PDK
 # -----------------------------------
 # pip install gdsfactory
 if [ "$(uname)" == 'Darwin' ]; then
 	OS='Mac'
 	python3 -m pip install gf180 pip-autoremove --break-system-packages
-#	python3 -m pip install gdsfactory pip-autoremove --break-system-packages
 	volare enable --pdk gf180mcu $VOLARE_H
 elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
 	OS='Linux'
 	pip install gf180
-#	pip install gdsfactory
 	volare enable --pdk gf180mcu $VOLARE_H
 elif [ "$(expr substr $(uname -s) 1 10)" == 'MINGW32_NT' ]; then
 	OS='Cygwin'

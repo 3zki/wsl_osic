@@ -1,6 +1,6 @@
 #!/bin/bash
 # ========================================================================
-# QFlow options for Ubuntu WSL2 and Mac M core Series
+# QFlow options for Ubuntu WSL2 and macOS.
 # ========================================================================
 
 # Define setup environment
@@ -12,8 +12,27 @@ my_dir=$(dirname "$my_path")
 export SCRIPT_DIR="$my_dir"
 
 # for Mac
-# ------------------------
-export GSL_VERSION=2.8
+if [ "$(uname)" == 'Darwin' ]; then
+  VER=`sw_vers -productVersion | awk -F. '{ print $1 }'`
+  case $VER in
+    "14")
+      export MAC_OS_NAME=Sonoma
+      ;;
+    "15")
+      export MAC_OS_NAME=Sequoia
+      ;;
+    *)
+      echo "Your Mac OS Version ($VER) is not supported."
+      exit 1
+      ;;
+  esac
+  export MAC_ARCH_NAME=`uname -m`
+fi
+export TCL_VERSION=8.6.14
+export TK_VERSION=8.6.14
+export GTK_VERSION=3.24.42
+export CC_VERSION=-14
+export CXX_VERSION=-14
 
 # Install/update qrouter
 # --------------------
