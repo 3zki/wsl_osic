@@ -120,12 +120,55 @@ ln -s $HOME/.klayout/python/pycell4klayout-api/source/python/cni/ $HOME/.klayout
 echo ">>>> Install OpenEMS"
 if [ "$(uname)" == 'Darwin' ]; then
   OS='Mac'
-  brew install cmake boost tinyxml hdf5 cgal vtk octave paraview
-  python3 -m pip install cython numpy h5py matplotlib pip-autoremove --break-system-packages
+  if [ ! -d "~/Library/Caches/Homebrew/openems--git/" ]; then
+	  brew install cmake boost tinyxml hdf5 cgal vtk octave paraview
+	  python3 -m pip install cython numpy h5py matplotlib pip-autoremove --break-system-packages
+	  brew tap thliebig/openems https://github.com/thliebig/openEMS-Project.git
+	  brew install --HEAD openems
+	  cd ~/Library/Caches/Homebrew/openems--git/
+	  cd CSXCAD
+	  cd python
+	  python3 -m pip install . --user pip-autoremove --break-system-packages
+	  cd ..
+	  cd openEMS
+	  cd python
+	  python3 -m pip install . --user pip-autoremove --break-system-packages
+	  cd ..
+	  echo 'export PATH="$(brew --prefix)/opt/openEMS/bin:$PATH"' >> ~/.zshrc
+	  echo 'addpath("$(brew --prefix)/share/openEMS/matlab:$(brew --prefix)/share/CSXCAD/matlab:$(brew --prefix)/share/hyp2mat/matlab:$(brew --prefix)/share/CTB/matlab");' >> ~/.octaverc
+  else
+	  brew upgrade --fetch-HEAD openems
+  fi
 elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
   OS='Linux'
-  sudo apt-get install -y build-essential cmake git libhdf5-dev libvtk7-dev libboost-all-dev libcgal-dev libtinyxml-dev qtbase5-dev libvtk7-qt-dev octave liboctave-dev gengetopt hel  p2man groff pod2pdf bison flex libhpdf-dev libtool qtbase5-dev libvtk9-qt-dev paraview
-  sudo pip install numpy matplotlib cython h5py
+  cd $SRC_DIR
+  if [ ! -d "$SRC_DIR/openEMS-Project" ]; then
+	  sudo apt-get install -y build-essential cmake git libhdf5-dev libvtk7-dev libboost-all-dev libcgal-dev libtinyxml-dev qtbase5-dev libvtk7-qt-dev octave liboctave-dev gengetopt hel  p2man groff pod2pdf bison flex libhpdf-dev libtool qtbase5-dev libvtk9-qt-dev paraview
+	  sudo pip install numpy matplotlib cython h5py
+	  git clone --recursive https://github.com/thliebig/openEMS-Project.git
+	  cd openEMS-Project
+	  echo 'export PATH="$HOME/bin:$HOME/.local/bin:$HOME/opt/openEMS/bin:$PATH"' >> ~/.bashrc
+	  echo 'addpath("$HOME/opt/openEMS/share/CSXCAD/matlab:$HOME/opt/openEMS/share/CSXCAD/matlab:$HOME/opt/openEMS/share/hyp2mat/matlab:$HOME/opt/openEMS/share/CTB/matlab");' >> ~/.octaverc
+  else
+	  cd openEMS-Project
+	  git pull --recurse-submodules
+  fi
+  ./update_openEMS.sh ~/opt/openEMS --with-hyp2mat --with-CTB --python
+
+  mv $HOME/.local/lib/python3.10/site-packages/CSXCAD-0.6.2-py3.10-linux-x86_64.egg $HOME/.local/lib/python3.10/site-packages/CSXCAD-0.6.2-py3.10-linux-x86_64.egg.zip
+  mkdir $HOME/.local/lib/python3.10/site-packages/CSXCAD-0.6.2-py3.10-linux-x86_64.egg
+  mv $HOME/.local/lib/python3.10/site-packages/CSXCAD-0.6.2-py3.10-linux-x86_64.egg.zip $HOME/.local/lib/python3.10/site-packages/CSXCAD-0.6.2-py3.10-linux-x86_64.egg/
+  cd $HOME/.local/lib/python3.10/site-packages/CSXCAD-0.6.2-py3.10-linux-x86_64.egg/
+  unzip CSXCAD-0.6.2-py3.10-linux-x86_64.egg.zip
+
+  mv $HOME/.local/lib/python3.10/site-packages/openEMS-0.0.36-py3.10-linux-x86_64.egg  $HOME/.local/lib/python3.10/site-packages/openEMS-0.0.36-py3.10-linux-x86_64.egg.zip
+  mkdir $HOME/.local/lib/python3.10/site-packages/openEMS-0.0.36-py3.10-linux-x86_64.egg
+  mv $HOME/.local/lib/python3.10/site-packages/openEMS-0.0.36-py3.10-linux-x86_64.egg,zip $HOME/.local/lib/python3.10/site-packages/openEMS-0.0.36-py3.10-linux-x86_64.egg/
+  cd $HOME/.local/lib/python3.10/site-packages/openEMS-0.0.36-py3.10-linux-x86_64.egg/
+  unzip openEMS-0.0.36-py3.10-linux-x86_64.egg.zip
+
+  cd $SRC_DIR
+
 elif [ "$(expr substr $(uname -s) 1 10)" == 'MINGW32_NT' ]; then
   OS='Cygwin'
   echo "Your platform ($(uname -a)) is not supported."
@@ -134,16 +177,6 @@ else
   echo "Your platform ($(uname -a)) is not supported."
   exit 1
 fi
-
-cd $SRC_DIR
-if [ ! -d "$SRC_DIR/openEMS-Project" ]; then
-	git clone --recursive https://github.com/thliebig/openEMS-Project.git
-	cd openEMS-Project
-else
-	cd openEMS-Project
-	git pull --recurse-submodules
-fi
-./update_openEMS.sh ~/opt/openEMS --with-hyp2mat --with-CTB --python
 
 
 # Create .spiceinit
@@ -164,7 +197,7 @@ fi
 	echo "export PDK=$PDK"
 	echo "export STD_CELL_LIBRARY=$MY_STDCELL"
 	echo "export PYTHONPYCACHEPREFIX=/tmp"
-	echo "export PATH=\"$HOME/bin:$PATH\""
+	echo 'export PATH="$HOME/bin:$PATH"'
 } >> "$HOME/.bashrc"
 
 # Copy various things
