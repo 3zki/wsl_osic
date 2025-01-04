@@ -150,7 +150,7 @@ elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
   cd $SRC_DIR
   if [ ! -d "$SRC_DIR/openEMS-Project" ]; then
 	  sudo apt-get install -y build-essential cmake git libhdf5-dev libvtk7-dev libboost-all-dev libcgal-dev libtinyxml-dev qtbase5-dev libvtk7-qt-dev octave liboctave-dev gengetopt hel  p2man groff pod2pdf bison flex libhpdf-dev libtool qtbase5-dev libvtk9-qt-dev paraview
-	  sudo pip install numpy matplotlib cython h5py
+	  pip3 install numpy matplotlib cython h5py
 	  git clone --recursive https://github.com/thliebig/openEMS-Project.git
 	  cd openEMS-Project
 	  echo 'export PATH="$HOME/bin:$HOME/.local/bin:$HOME/opt/openEMS/bin:$PATH"' >> ~/.bashrc
