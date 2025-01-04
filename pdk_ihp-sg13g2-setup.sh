@@ -158,9 +158,8 @@ if [ "$(uname)" == 'Darwin' ]; then
   if [ ! -d "$SRC_DIR/openEMS-Project" ]; then
 	  brew install cmake boost tinyxml hdf5 cgal vtk octave paraview
 	  python3 -m pip install cython numpy h5py matplotlib pip-autoremove --break-system-packages
-	  echo 'export PATH="$(brew --prefix)/opt/openEMS/bin:$PATH"' >> ~/.zshrc
-	  echo 'addpath("$(brew --prefix)/share/openEMS/matlab:$(brew --prefix)/share/CSXCAD/matlab:$(brew --prefix)/share/hyp2mat/matlab:$(brew --prefix)/share/CTB/matlab");' >> ~/.octaverc
-  fi
+	  echo 'export PATH="$HOME/opt/openEMS/bin:$PATH"' >> ~/.zshrc
+	  echo 'addpath("$HOME/opt/openEMS/share/CSXCAD/matlab:$HOME/opt/openEMS/share/CSXCAD/matlab:$HOME/opt/openEMS/share/hyp2mat/matlab:$HOME/opt/openEMS/share/CTB/matlab");' >> ~/.  fi
 elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
   OS='Linux'
   if [ ! -d "$SRC_DIR/openEMS-Project" ]; then
