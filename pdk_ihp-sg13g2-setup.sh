@@ -22,20 +22,6 @@ echo ""
 echo ">>>> Initializing..."
 echo ""
 
-if [ "$(uname)" == 'Darwin' ]; then
-	OS='Mac'
-	echo "Your platform ($(uname -a)) is not supported."
-	exit 1
-elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
-	OS='Linux'
-elif [ "$(expr substr $(uname -s) 1 10)" == 'MINGW32_NT' ]; then
-	OS='Cygwin'
-	echo "Your platform ($(uname -a)) is not supported."
-	exit 1
-else
-	echo "Your platform ($(uname -a)) is not supported."
-	exit 1
-fi
 
 # for Mac
 if [ "$(uname)" == 'Darwin' ]; then
@@ -71,13 +57,28 @@ mkdir "$PDK_ROOT"
 
 # Install OpenVAF
 # -----------------------------------
-cd $HOME
-mkdir bin
-cd bin
-wget https://openva.fra1.cdn.digitaloceanspaces.com/openvaf$OPENVAF_VERSIONlinux_amd64.tar.gz
-tar zxf openvaf$OPENVAF_VERSIONlinux_amd64.tar.gz
-rm openvaf$OPENVAF_VERSIONlinux_amd64.tar.gz
-export PATH=$HOME/bin:$PATH
+echo ">>>> Install OpenVAF"
+if [ "$(uname)" == 'Darwin' ]; then
+	OS='Mac'
+	echo ">>>> Not supported OpenVAF on macOS."
+elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
+	OS='Linux'
+	cd $HOME
+	mkdir bin
+	cd bin
+	wget https://openva.fra1.cdn.digitaloceanspaces.com/openvaf$OPENVAF_VERSIONlinux_amd64.tar.gz
+	tar zxf openvaf$OPENVAF_VERSIONlinux_amd64.tar.gz
+	rm openvaf$OPENVAF_VERSIONlinux_amd64.tar.gz
+	export PATH=$HOME/bin:$PATH
+elif [ "$(expr substr $(uname -s) 1 10)" == 'MINGW32_NT' ]; then
+	OS='Cygwin'
+	echo "Your platform ($(uname -a)) is not supported."
+	exit 1
+else
+	echo "Your platform ($(uname -a)) is not supported."
+	exit 1
+fi
+
 
 # Install PDK
 # -----------------------------------
@@ -116,8 +117,23 @@ ln -s $HOME/.klayout/python/pycell4klayout-api/source/python/cni/ $HOME/.klayout
 
 # Install OpenEMS
 # -----------------------------------
-sudo apt-get install -y build-essential cmake git libhdf5-dev libvtk7-dev libboost-all-dev libcgal-dev libtinyxml-dev qtbase5-dev libvtk7-qt-dev octave liboctave-dev gengetopt help2man groff pod2pdf bison flex libhpdf-dev libtool 
-sudo pip install numpy matplotlib cython h5py
+echo ">>>> Install OpenEMS"
+if [ "$(uname)" == 'Darwin' ]; then
+  OS='Mac'
+  brew install cmake boost tinyxml hdf5 cgal vtk octave paraview
+  python3 -m pip install cython numpy h5py matplotlib pip-autoremove --break-system-packages
+elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
+  OS='Linux'
+  sudo apt-get install -y build-essential cmake git libhdf5-dev libvtk7-dev libboost-all-dev libcgal-dev libtinyxml-dev qtbase5-dev libvtk7-qt-dev octave liboctave-dev gengetopt hel  p2man groff pod2pdf bison flex libhpdf-dev libtool qtbase5-dev libvtk9-qt-dev paraview
+  sudo pip install numpy matplotlib cython h5py
+elif [ "$(expr substr $(uname -s) 1 10)" == 'MINGW32_NT' ]; then
+  OS='Cygwin'
+  echo "Your platform ($(uname -a)) is not supported."
+  exit 1
+else
+  echo "Your platform ($(uname -a)) is not supported."
+  exit 1
+fi
 
 cd $SRC_DIR
 if [ ! -d "$SRC_DIR/openEMS-Project" ]; then
