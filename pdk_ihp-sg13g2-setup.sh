@@ -86,7 +86,13 @@ cd $PDK_ROOT
 git clone --recursive https://github.com/IHP-GmbH/IHP-Open-PDK.git
 
 cd $PDK_GIT_NAME
-pip install -r requirements.txt
+if [ "$(uname)" == 'Darwin' ]; then
+	OS='Mac'
+	python3 - m pip3install -r requirements.txt pip-autoremove --break-system-packages
+elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
+	OS='Linux'
+	pip3 install -r requirements.txt
+fi
 cd $PDK_NAME/libs.tech/xschem/
 export PDK_ROOT="$HOME/pdk/$PDK_GIT_NAME"
 python3 install.py
