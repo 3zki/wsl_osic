@@ -88,7 +88,7 @@ git clone --recursive https://github.com/IHP-GmbH/IHP-Open-PDK.git
 cd $PDK_GIT_NAME
 if [ "$(uname)" == 'Darwin' ]; then
 	OS='Mac'
-	python3 - m pip3install -r requirements.txt pip-autoremove --break-system-packages
+	python3 - m pip install -r requirements.txt pip-autoremove --break-system-packages
 elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
 	OS='Linux'
 	pip3 install -r requirements.txt
