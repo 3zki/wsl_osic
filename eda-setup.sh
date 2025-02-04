@@ -224,12 +224,11 @@ if [ ! -d "$SRC_DIR/xschem-gaw" ]; then
   git clone https://github.com/StefanSchippers/xschem-gaw.git "$SRC_DIR/xschem-gaw"
   cd "$SRC_DIR/xschem-gaw" || exit
   aclocal && automake --add-missing && autoconf
-  export GETTEXT_VERSION=`gettext --version | awk 'NR==1{print $4}'`
+#  export GETTEXT_VERSION=`gettext --version | awk 'NR==1{print $4}'`
+  export GETTEXT_VERSION=0.22
   if [ "$(uname)" == 'Darwin' ]; then
     OS='Mac'
-    if [ "$(MAC_ARCH_NAME)" == 'arm64' ]; then
-      sed -i '' "s/GETTEXT_MACRO_VERSION = 0.18/GETTEXT_MACRO_VERSION = $GETTEXT_VERSION/g" po/Makefile.in.in
-    fi
+    sed -i '' "s/GETTEXT_MACRO_VERSION = 0.18/GETTEXT_MACRO_VERSION = $GETTEXT_VERSION/g" po/Makefile.in.in
     ./configure --enable-gawsound=no LDFLAGS="-L/usr/X11/lib"
   elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
     OS='Linux'
@@ -260,11 +259,7 @@ if [ "$(uname)" == 'Darwin' ]; then
     fi
     brew link qt --force
     brew install libgit2
-    brew install ruby@3.3
-    brew link ruby@3.3 --force
-    export PATH="$(brew --prefix ruby@3.3)/bin:$PATH"
-    export LDFLAGS="-L$(brew --prefix ruby@3.3)/lib"
-    export CPPFLAGS="-I$(brew --prefix ruby@3.3)/include"
+    brew install ruby
     git clone --depth 1 https://github.com/KLayout/klayout.git "$SRC_DIR/klayout"
     cd "$SRC_DIR/klayout" || exit
   else
@@ -272,10 +267,10 @@ if [ "$(uname)" == 'Darwin' ]; then
     cd "$SRC_DIR/klayout" || exit
     git pull
   fi
-  python3 build4mac.py -r HB33 -p HBAuto -q Qt6Brew -m ‘—jobs=8’ -n -u
+  python3 build4mac.py -r HB34 -p HBAuto -q Qt6Brew -m ‘—jobs=8’ -n -u
   rm -fr $HOME/bin/klayout.app
   mkdir -p $HOME/bin/klayout.app
-  cp -aR $SRC_DIR/klayout/qt6Brew.bin.macos-$MAC_OS_NAME-release-Rhb33Phbauto/* $HOME/bin/klayout.app/
+  cp -aR $SRC_DIR/klayout/qt6Brew.bin.macos-$MAC_OS_NAME-release-Rhb34Phbauto/* $HOME/bin/klayout.app/
   echo 'export PATH="$HOME/bin/:$PATH"' >> ~/.zshrc
   export PATH="$HOME/bin/:$PATH"
   cp $my_dir/klayout.sh $HOME/bin/
@@ -404,9 +399,13 @@ if [ ! -d "$SRC_DIR/ngspice" ]; then
   fi
 else
   echo ">>>> Updating ngspice"
-        cd "$SRC_DIR/ngspice" || exit
-        git pull
-  export PATH="/opt/homebrew/opt/m4/bin:$PATH"
+  cd "$SRC_DIR/ngspice" || exit
+  git pull
+  if [ "$(uname)" == 'Darwin' ]; then
+    OS='Mac'
+    export PATH="$(brew --prefix m4)/bin:$PATH"
+    export PATH="$(brew --prefix bison)/bin:$PATH"
+  fi
 fi
 make clean
 make -j"$(nproc)" && sudo make install
