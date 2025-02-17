@@ -199,7 +199,7 @@ elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
 
   mv $HOME/.local/lib/python3.10/site-packages/openEMS-0.0.36-py3.10-linux-x86_64.egg  $HOME/.local/lib/python3.10/site-packages/openEMS-0.0.36-py3.10-linux-x86_64.egg.zip
   mkdir $HOME/.local/lib/python3.10/site-packages/openEMS-0.0.36-py3.10-linux-x86_64.egg
-  mv $HOME/.local/lib/python3.10/site-packages/openEMS-0.0.36-py3.10-linux-x86_64.egg,zip $HOME/.local/lib/python3.10/site-packages/openEMS-0.0.36-py3.10-linux-x86_64.egg/
+  mv $HOME/.local/lib/python3.10/site-packages/openEMS-0.0.36-py3.10-linux-x86_64.egg.zip $HOME/.local/lib/python3.10/site-packages/openEMS-0.0.36-py3.10-linux-x86_64.egg/
   cd $HOME/.local/lib/python3.10/site-packages/openEMS-0.0.36-py3.10-linux-x86_64.egg/
   unzip openEMS-0.0.36-py3.10-linux-x86_64.egg.zip
 fi
