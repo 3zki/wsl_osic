@@ -119,11 +119,11 @@ fi
 cp -f $PDK_ROOT/$PDK/libs.tech/klayout/tech/sg13g2.lyp $HOME/.klayout/tech/
 cp -f $PDK_ROOT/$PDK/libs.tech/klayout/tech/sg13g2.lyt $HOME/.klayout/tech/
 
-cp -rf $PDK_ROOT/$PDK/libs.tech/klayout/tech/drc $HOME/.klayout/drc
-cp -rf $PDK_ROOT/$PDK/libs.tech/klayout/tech/lvs $HOME/.klayout/lvs
-cp -rf $PDK_ROOT/$PDK/libs.tech/klayout/tech/macros $HOME/.klayout/macros
-cp -rf $PDK_ROOT/$PDK/libs.tech/klayout/tech/pymacros $HOME/.klayout/pymacros
-cp -rf $PDK_ROOT/$PDK/libs.tech/klayout/python $HOME/.klayout/python
+cp -rf $PDK_ROOT/$PDK/libs.tech/klayout/tech/drc $HOME/.klayout/
+cp -rf $PDK_ROOT/$PDK/libs.tech/klayout/tech/lvs $HOME/.klayout/
+cp -rf $PDK_ROOT/$PDK/libs.tech/klayout/tech/macros $HOME/.klayout/
+cp -rf $PDK_ROOT/$PDK/libs.tech/klayout/tech/pymacros $HOME/.klayout/
+cp -rf $PDK_ROOT/$PDK/libs.tech/klayout/python $HOME/.klayout/
 ln -s $HOME/.klayout/python/pycell4klayout-api/source/python/cni/ $HOME/.klayout/python/cni
 
 
