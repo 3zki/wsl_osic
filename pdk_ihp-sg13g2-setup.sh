@@ -55,6 +55,7 @@ if [ -d "$PDK_ROOT" ]; then
 fi
 mkdir "$PDK_ROOT"
 
+
 # Install OpenVAF
 # -----------------------------------
 echo ">>>> Install OpenVAF"
@@ -69,6 +70,7 @@ elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
 	wget https://openva.fra1.cdn.digitaloceanspaces.com/openvaf$OPENVAF_VERSIONlinux_amd64.tar.gz
 	tar zxf openvaf$OPENVAF_VERSIONlinux_amd64.tar.gz
 	rm openvaf$OPENVAF_VERSIONlinux_amd64.tar.gz
+	mv openvaf.exe openvaf
 	export PATH=$HOME/bin:$PATH
 elif [ "$(expr substr $(uname -s) 1 10)" == 'MINGW32_NT' ]; then
 	OS='Cygwin'
@@ -207,10 +209,24 @@ fi
 cd $SRC_DIR
 
 
+# Setup ngspice libs
+# -----------------
+export PDK_ROOT=$PDK_ROOT/$PDK_GIT_NAME
+export PDK=$PDK_NAME
+cd $PDK_ROOT/$PDK/libs.tech/xschem/
+sed -i 's/openvaf psp103_nqs.va/openvaf --target x86_64-unknown-linux psp103_nqs.va/g' install.py
+python3 install.py
+cd $SRC_DIR
+
+
+# Copy various things
+# -------------------
+rm $HOME/.xschem/xschemrc
+cp -f $PDK_ROOT/$PDK/libs.tech/xschem/xschemrc $HOME/.xschem/
+
+
 # Create .spiceinit
 # -----------------
-rm $HOME/.spiceinit
-cp -f $PDK_ROOT/$PDK/libs.tech/ngspice/.spiceinit $HOME/
 {
 	echo "set num_threads=$(nproc)"
 } >> "$HOME/.spiceinit"
@@ -228,10 +244,6 @@ fi
 	echo 'export PATH="$HOME/bin:$PATH"'
 } >> "$HOME/.bashrc"
 
-# Copy various things
-# -------------------
-rm $HOME/.xschem/xschemrc
-cp -f $PDK_ROOT/$PDK/libs.tech/xschem/xschemrc $HOME/.xschem/
 
 # Fix paths in xschemrc to point to correct PDK directory
 # -------------------------------------------------------
