@@ -2,7 +2,9 @@
 
 SKY130&TinyTapeout for analog / GF180MCU / OpenRule1umPDK / ihp-sg13g2 / development tools for Ubuntu 22 (WSL2) and macOS
 
-  1. Run `tool-install.sh`
+## EDA setup
+
+  1. Run `eda-setup.sh`
 ```
 git clone https://github.com/noritsuna/wsl_osic_4_mac
 cd wsl_osic_4_mac
@@ -11,6 +13,35 @@ bash eda-setup.sh
 
   2. Restart your environment
   3. Choose the PDK you want to use...
+
+
+### Options
+#### QFlow
+
+  1. Run `eda-qflow-option.sh`
+
+```
+bash eda-qflow-option.sh
+```
+
+
+#### Qucs-S
+
+  1. Run `eda-Qucs-S-option.sh`
+
+```
+bash eda-Qucs-S-option.sh
+```
+
+
+#### Xyce
+
+  1. Run `eda-xyce-option.sh`
+
+```
+bash eda-xyce-option.sh
+```
+
 
 ## SKY130 and TinyTapeout by SKY130 for analog
   4. Run `bash pdk_sky130-setup.sh`
