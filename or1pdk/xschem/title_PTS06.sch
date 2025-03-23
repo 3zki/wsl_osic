@@ -35,14 +35,14 @@ T {**pts_np.sym} 720 -680 0 0 0.4 0.4 {}
 T {**R_nwell.sym} 720 -520 0 0 0.4 0.4 {}
 C {devices/title.sym} 160 -30 0 0 {name=l1 author="MakeLSI & ISHI-kai"}
 C {primitives/nfet.sym} 100 -430 0 0 {name=M2
-model=nchorex1
-W=1u
+model=nmos
+W=2u
 L=1u
 m=1
 }
 C {primitives/pfet.sym} 100 -590 0 0 {name=M1 
-model=pchorex1
-W=2u
+model=pmos
+W=6u
 L=1u
 m=1
 }

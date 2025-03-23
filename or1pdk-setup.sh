@@ -21,28 +21,13 @@ echo ""
 # Copy KLayout Configurations
 # ----------------------------------
 if [ ! -d "$HOME/.klayout" ]; then
-	# cp -rf klayout $HOME/.klayout
 	mkdir $HOME/.klayout
-	mkdir $HOME/.klayout/lvs
 	mkdir $HOME/.klayout/salt
-	mkdir $HOME/.klayout/macros
 	# mkdir $home/.klayout/libraries
-fi
-
-# Delete previous PDK
-# ---------------------------------------------
-if [ -d "$PDK_ROOT" ]; then
-	echo ">>>> Delete previous PDK"
-	sudo rm -rf "$PDK_ROOT"
-	sudo mkdir "$PDK_ROOT"
-	sudo chown "$USER:staff" "$PDK_ROOT"
 fi
 
 # Install PDK
 # -----------------------------------
-cp -f or1pdk/lvs.lylvs $HOME/.klayout/lvs/lvs.lylvs
-cp -f or1pdk/or1_lvs_make_stdcells.lym $HOME/.klayout/macros/or1_lvs_make_stdcells.lym
-cp -f or1pdk/or1_lvs_make.lym $HOME/.klayout/macros/or1_lvs_make.lym
 cp -f or1pdk/klayoutrc $HOME/.klayout/klayoutrc
 # cp -aR or1pdk/GDS/PTS06/* $HOME/.klayout/libraries
 
