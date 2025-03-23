@@ -31,7 +31,7 @@ my_path=$(realpath "$0")
 my_dir=$(dirname "$my_path")
 export SCRIPT_DIR="$my_dir"
 export UBUNTU_VERSION=22
-export KLAYOUT_VERSION=0.29.9
+export KLAYOUT_VERSION=0.29.10
 # This selects which sky130 PDK flavor (A=sky130A, B=sky130B, all=both)  is installed
 export OPEN_PDK_ARGS="--with-sky130-variants=A"
 export PDK=sky130A
@@ -208,14 +208,17 @@ make clean
 make -j"$(nproc)" && sudo make install
 make clean
 
-# setup gnome-terminal (WA for Ubuntu 22 WSL2)
-# --------
-sudo apt -qq install -y gnome-terminal
-systemctl --user start gnome-terminal-server
+# setup gnome-terminal (Ubuntu 22 WSL2)
+# --------------------------------------------
+#sudo apt -qq install -y gnome-terminal
+#systemctl --user start gnome-terminal-server
 
+# setup lxterminal (Patch for Ubuntu 24 WSL2)
+# -------------------------------------------
+sudo apt -qq install -y lxterminal
 
 # Fix xschem symbol path problem
-# WA for Xschem 3.4.6 RC
+# WA for Xschem 3.4.6
 # --------
 sudo sed -i "s/set curr_dirname \[pwd\]/set curr_dirname \[xschem get current_dirname\]/g" /usr/local/share/xschem/xschem.tcl
 
