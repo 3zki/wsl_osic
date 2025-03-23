@@ -211,11 +211,9 @@ make clean
 # setup gnome-terminal (Ubuntu 22 WSL2)
 # --------------------------------------------
 sudo apt -qq install -y gnome-terminal
+# Patch for Ubuntu 24 WSL 2
+dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
 systemctl --user start gnome-terminal-server
-
-# setup lxterminal (Patch for Ubuntu 24 WSL2)
-# -------------------------------------------
-sudo apt -qq install -y lxterminal
 
 # Fix xschem symbol path problem
 # WA for Xschem 3.4.6
