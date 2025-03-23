@@ -23,6 +23,7 @@ echo ""
 if [ ! -d "$HOME/.klayout" ]; then
 	# cp -rf klayout $HOME/.klayout
 	mkdir $HOME/.klayout
+	mkdir $HOME/.klayout/lvs
 	mkdir $HOME/.klayout/salt
 	mkdir $HOME/.klayout/macros
 	# mkdir $home/.klayout/libraries
@@ -39,6 +40,7 @@ fi
 
 # Install PDK
 # -----------------------------------
+cp -f or1pdk/lvs.lylvs $HOME/.klayout/lvs/lvs.lylvs
 cp -f or1pdk/or1_lvs_make_stdcells.lym $HOME/.klayout/macros/or1_lvs_make_stdcells.lym
 cp -f or1pdk/or1_lvs_make.lym $HOME/.klayout/macros/or1_lvs_make.lym
 cp -f or1pdk/klayoutrc $HOME/.klayout/klayoutrc

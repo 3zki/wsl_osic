@@ -33,9 +33,9 @@
   system( "cp -f #{simpath}/#{gds_base}.spice #{gds_dir}/lvs_work/#{gds_base}.net.txt" )
   system( "cp -f #{simpath}/#{gds_base}.spice #{gds_dir}/lvs_work/#{gds_base}_reference.cir.txt" )
   system( "sed -i -e 's/.subckt #{gds_base}/.subckt #{cell_name}/g' #{gds_dir}/lvs_work/#{gds_base}_reference.cir.txt" )
-  system( "sed -i -e 's/#{pmos}/PMOS/g' #{gds_dir}/lvs_work/#{gds_base}_reference.cir.txt" )
-  system( "sed -i -e 's/#{nmos}/NMOS/g' #{gds_dir}/lvs_work/#{gds_base}_reference.cir.txt" )
-  system( "gnome-terminal --title=Netlist --working-directory=#{gds_dir} -- sh -c 'cat #{gds_dir}/lvs_work/#{gds_base}_reference.cir.txt; read line'" )
+  system( "sed -i -e 's/#{pmos}/PCh/g' #{gds_dir}/lvs_work/#{gds_base}_reference.cir.txt" )
+  system( "sed -i -e 's/#{nmos}/NCh/g' #{gds_dir}/lvs_work/#{gds_base}_reference.cir.txt" )
+  system( "lxterminal --title=Netlist --working-directory=#{gds_dir} --command='less #{gds_dir}/lvs_work/#{gds_base}_reference.cir.txt'" )
 end
 </text>
 </klayout-macro>

@@ -38,7 +38,7 @@
   system( "sed -i -e 's/stdcells_sim/stdcells_lvs/g' #{gds_dir}/lvs_work/#{gds_base}_reference.cir.tmp" )
   system( "cat #{gds_dir}/lvs_work/#{gds_base}_reference.cir.tmp | awk '!a[$0]++{print}' &gt; #{gds_dir}/lvs_work/#{gds_base}_reference.cir.txt" )
   system( "rm -rf #{gds_dir}/lvs_work/#{gds_base}_reference.cir.tmp" )
-  system( "gnome-terminal --title=Netlist --working-directory=#{gds_dir} -- sh -c 'cat #{gds_dir}/lvs_work/#{gds_base}_reference.cir.txt; read line'" )
+  system( "lxterminal --title=Netlist --working-directory=#{gds_dir} --command='less #{gds_dir}/lvs_work/#{gds_base}_reference.cir.txt'" )
 end
 </text>
 </klayout-macro>
