@@ -2,6 +2,8 @@
 
 SKY130 / GF180MCU / OpenRule1umPDK development tools for Ubuntu 22 (WSL2)
 
+(OpenRule1umPDK supports Ubuntu 24 (WSL2) experimentally)
+
 # Digital flow (OpenROAD)
   1. Run `openroad-install.sh`
 ```
@@ -81,7 +83,7 @@ Under construction...
 * Add DRC/LVS/PEX menu
   * Magic LVS cannot recognize V5_XTOR therefore menu replaces "05v0" with "06v0" in source netlist
 
-## OpenRule1umPDK (PTS06)
+## OpenRule1umPDK
   4. Run `or1pdk-setup.sh`
   5. Enjoy!
 #### Uninstall or change the PDK
