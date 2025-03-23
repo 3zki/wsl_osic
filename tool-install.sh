@@ -210,8 +210,8 @@ make clean
 
 # setup gnome-terminal (Ubuntu 22 WSL2)
 # --------------------------------------------
-#sudo apt -qq install -y gnome-terminal
-#systemctl --user start gnome-terminal-server
+sudo apt -qq install -y gnome-terminal
+systemctl --user start gnome-terminal-server
 
 # setup lxterminal (Patch for Ubuntu 24 WSL2)
 # -------------------------------------------
