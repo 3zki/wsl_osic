@@ -69,14 +69,9 @@ if [ ! -d "$HOME/.klayout" ]; then
 	# cp -rf klayout $HOME/.klayout
 	mkdir $HOME/.klayout
 	mkdir $HOME/.klayout/salt
-	mkdir $HOME/.klayout/macros
-	mkdir $home/.klayout/libraries
 fi
 cd $my_dir
-cp -f or1pdk/or1_lvs_make_stdcells.lym $HOME/.klayout/macros/or1_lvs_make_stdcells.lym
-cp -f or1pdk/or1_lvs_make.lym $HOME/.klayout/macros/or1_lvs_make.lym
 cp -f or1pdk/klayoutrc $HOME/.klayout/klayoutrc
-# cp -aR or1pdk/GDS/PTS06/* $HOME/.klayout/libraries
 
 
 if [ ! -d "$SRC_DIR/OpenRule1um" ]; then

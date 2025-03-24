@@ -18,21 +18,26 @@ CELL_NAME = "INDUCTOR"
 ORIGIN_XY = (0.0,0.0)
 #TOP_METAL_LAYER = {"layer": 72, "datatype": 20}	# Sky130 of Metal5
 #TOP_METAL_LAYER = {"layer": 71, "datatype": 20}		# Sky130 of Metal4
-TOP_METAL_LAYER = {"layer": 10, "datatype": 0}		# OR1 of Metal2
+#TOP_METAL_LAYER = {"layer": 10, "datatype": 0}		# OR1 of Metal2
+TOP_METAL_LAYER = {"layer": 134, "datatype": 0}		# iHP of Metal2
 #TOP_VIA_LAYER = {"layer": 70, "datatype": 44}		# Sky130 of VIA3
-TOP_VIA_LAYER = {"layer": 9, "datatype": 0}		# OR1 of VIA1
+#TOP_VIA_LAYER = {"layer": 9, "datatype": 0}		# OR1 of VIA1
+TOP_VIA_LAYER = {"layer": 133, "datatype": 0}		# iHP of VIA2
 #UNDER_METAL_LAYER = {"layer": 70, "datatype": 20}	# Sky130 of Metal3
-UNDER_METAL_LAYER = {"layer": 8, "datatype": 0}	# OR1 of Metal1
+#UNDER_METAL_LAYER = {"layer": 8, "datatype": 0}	# OR1 of Metal1
+UNDER_METAL_LAYER = {"layer": 126, "datatype": 0}	# OR1 of Metal1
 VIA_SIZE = 1.0
 VIA_MAT_SIZE = 1.6
 #METAL_THICKNESS = 1.26				# um Thickness of Sky130 Metal5
 #METAL_THICKNESS = 0.854				# um Thickness of Sky130 Metal4,3
-METAL_THICKNESS = 0.854				# um Thickness of OR1 Metal2
+#METAL_THICKNESS = 0.854				# um Thickness of OR1 Metal2
+METAL_THICKNESS = 0.49				# um Thickness of iHP Metal2
 #RHO_STR = "0.0285"				# ohm/sq of Sky130 Metal5
 #RHO_STR = "0.047"				# ohm/sq of Sky130 Metal4,3
-RHO_STR = "0.047"				# ohm/sq of OR1 Metal2
-MIN_FREQ="1e1"
-MAX_FREQ="1e6"
+#RHO_STR = "0.047"				# ohm/sq of OR1 Metal2
+RHO_STR = "0.094"				# ohm/sq of iHP Metal2
+MIN_FREQ="1e6"
+MAX_FREQ="1e10"
 
 
 class InductorShapeType(Enum):
