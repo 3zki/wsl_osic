@@ -270,5 +270,5 @@ fi
 echo ""
 echo ">>>> All done. Please restart or re-read .bashrc"
 echo ">>>> "
-#echo '>>>> Xyce on xschem Usage: mpirun /usr/local/bin/Xyce -plugin $env(PDK_ROOT)/$env(PDK)/libs.tech/xyce/adms/Xyce_Plugin_PSP103_VA.so "$N"'
+echo '>>>> Xyce on xschem Usage: mpirun /usr/local/bin/Xyce -plugin $env(PDK_ROOT)/$env(PDK)/libs.tech/xyce/plugin/Xyce_Plugin_PSP103_VA.so "$N"'
 echo ""
