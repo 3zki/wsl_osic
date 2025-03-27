@@ -222,8 +222,6 @@ cd $SRC_DIR
 
 # Setup Qucs-S libs
 # -----------------
-export PDK_ROOT=$PDK_ROOT/$PDK_GIT_NAME
-export PDK=$PDK_NAME
 cd $PDK_ROOT/$PDK/libs.tech/qucs/
 sed -i 's/openvaf psp103_nqs.va/openvaf --target x86_64-unknown-linux psp103_nqs.va/g' install.py
 sed -i 's/openvaf r3_cmc.va/openvaf --target x86_64-unknown-linux r3_cmc.va/g' install.py
@@ -274,5 +272,5 @@ fi
 echo ""
 echo ">>>> All done. Please restart or re-read .bashrc"
 echo ">>>> "
-echo '>>>> Xyce on xschem Usage: mpirun /usr/local/bin/Xyce -plugin $env(PDK_ROOT)/$env(PDK)/libs.tech/xyce/adms/Xyce_Plugin_PSP103_VA.so "$N"'
+#echo '>>>> Xyce on xschem Usage: mpirun /usr/local/bin/Xyce -plugin $env(PDK_ROOT)/$env(PDK)/libs.tech/xyce/adms/Xyce_Plugin_PSP103_VA.so "$N"'
 echo ""
