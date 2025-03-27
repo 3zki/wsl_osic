@@ -231,11 +231,8 @@ cd $SRC_DIR
 
 # Setup Xyce libs
 # -----------------
-#cd $PDK_ROOT/$PDK/libs.tech/xyce/adms/
-#buildxyceplugin psp103.va .
-#cp Xyce_Plugin_PSP103_VA.so ../../xschem/simulations/
-#mv Xyce_Plugin_PSP103_VA.so ../../xschem/examples/
-#echo 'Xyce on xschem Usage: mpirun /usr/local/bin/Xyce -plugin $env(PDK_ROOT)/$env(PDK)/libs.tech/xyce/adms/Xyce_Plugin_PSP103_VA.so "$N"'
+cd $PDK_ROOT/$PDK/libs.tech/verilog-a/
+bash adms-compile-va.sh
 
 
 # Copy various things
@@ -246,6 +243,7 @@ cp -f $PDK_ROOT/$PDK/libs.tech/xschem/xschemrc $HOME/.xschem/
 
 # Create .spiceinit
 # -----------------
+cp $PDK_ROOT/$PDK/libs.tech/ngspice/.spiceinit $HOME/
 {
 	echo "set num_threads=$(nproc)"
 } >> "$HOME/.spiceinit"
