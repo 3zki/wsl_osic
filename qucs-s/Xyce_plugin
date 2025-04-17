@@ -1,0 +1,2 @@
+#!/bin/sh
+/usr/local/bin/Xyce -plugin $PDK_ROOT/$PDK/libs.tech/xyce/plugins/Xyce_Plugin_PSP103_VA.so $1

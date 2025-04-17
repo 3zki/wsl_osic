@@ -116,6 +116,8 @@ fi
 
 cp $my_path/xyce/qmpirun $HOME/bin/
 chmod +x $HOME/bin/qmpirun
+cp $my_path/qucs-s/Xyce_plugin $HOME/bin/
+chmod +x $HOME/bin/Xyce_plugin
 
 # Finished
 # --------
