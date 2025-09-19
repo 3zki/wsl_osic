@@ -1,8 +1,6 @@
 # wsl_osic
 
-SKY130 / GF180MCU / OpenRule1umPDK development tools for Ubuntu 22 (WSL2)
-
-(OpenRule1umPDK supports Ubuntu 24 (WSL2) experimentally)
+SKY130 / GF180MCU / OpenRule1umPDK / IP62 development tools for Ubuntu 22/24 (WSL2)
 
 # Digital flow (OpenROAD)
   1. Run `openroad-install.sh`
