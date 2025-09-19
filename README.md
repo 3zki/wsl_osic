@@ -95,3 +95,14 @@ Under construction...
 Under construction...
 
 * Xschem Libraries
+
+## IP62 (Tokai Rika)
+  4. Run `ip62-setup.sh`
+  5. Enjoy!
+#### Uninstall or change the PDK
+  6. If you want to change the PDK, run `uninstall.sh`
+  7. Now you can change the PDK
+
+#### Differences between Standard PDK
+
+* Add "ip62_models.sym" in the models folder so you don't have to type the path to the Spice models!
