@@ -91,7 +91,7 @@ fi
 # ---------------------------------------------
 echo ">>>> Installing Volare"
 if [ ! -d "$SRC_DIR/volare" ]; then
-	git clone https://github.com/efabless/volare.git "$SRC_DIR/volare"
+	git clone --depth 1 --single-branch -b main https://github.com/efabless/volare.git "$SRC_DIR/volare"
 	cd "$SRC_DIR/volare" || exit
 else
 	echo ">>>> Updating xschem"
@@ -111,7 +111,7 @@ if [ ! -d "$SRC_DIR/xschem" ]; then
 	libxcb1 libx11-xcb-dev libcairo2 libcairo2-dev  \
 	tcl8.6 tcl8.6-dev tk8.6 tk8.6-dev \
 	flex bison libxpm4 libxpm-dev gawk tcl-tclreadline
-	git clone https://github.com/StefanSchippers/xschem.git "$SRC_DIR/xschem"
+	git clone --depth 1 --single-branch -b master https://github.com/StefanSchippers/xschem.git "$SRC_DIR/xschem"
 	cd "$SRC_DIR/xschem" || exit
 	./configure
 else
@@ -128,7 +128,7 @@ make clean
 if [ ! -d "$SRC_DIR/xschem-gaw" ]; then
 	echo ">>>> Installing gaw"
 	sudo apt -qq install -y libgtk-3-dev alsa libasound2-dev gettext libtool
-	git clone https://github.com/StefanSchippers/xschem-gaw.git "$SRC_DIR/xschem-gaw"
+	git clone --depth 1 --single-branch -b master https://github.com/StefanSchippers/xschem-gaw.git "$SRC_DIR/xschem-gaw"
 	cd "$SRC_DIR/xschem-gaw" || exit
 	aclocal && automake --add-missing && autoconf
 	#  FIXME this is just a WA for 22.04 LTS
@@ -157,7 +157,7 @@ if [ ! -d "$SRC_DIR/magic" ]; then
 	echo ">>>> Installing magic"
 	sudo apt -qq install -y m4 tcsh csh libx11-dev tcl-dev tk-dev \
 	libcairo2-dev mesa-common-dev libglu1-mesa-dev
-	git clone https://github.com/RTimothyEdwards/magic.git "$SRC_DIR/magic"
+	git clone --depth 1 --single-branch -b magic-8.3 https://github.com/RTimothyEdwards/magic.git "$SRC_DIR/magic"
 	cd "$SRC_DIR/magic" || exit
 	git checkout magic-8.3
 	./configure
@@ -174,7 +174,7 @@ make clean
 # ---------------------
 if [ ! -d "$SRC_DIR/netgen" ]; then
 	echo ">>>> Installing netgen"
-	git clone https://github.com/RTimothyEdwards/netgen.git "$SRC_DIR/netgen"
+	git clone --depth 1 --single-branch -b netgen-1.5 https://github.com/RTimothyEdwards/netgen.git "$SRC_DIR/netgen"
 	cd "$SRC_DIR/netgen" || exit
 	git checkout netgen-1.5
         ./configure
@@ -194,7 +194,7 @@ if [ ! -d "$SRC_DIR/ngspice" ]; then
 	sudo apt -qq install -y libxaw7-dev libxmu-dev libxext-dev libxft-dev \
 	libfontconfig1-dev libxrender-dev libfreetype6-dev libx11-dev libx11-6 \
 	libtool bison flex libreadline-dev libfftw3-dev 
-	git clone http://git.code.sf.net/p/ngspice/ngspice "$SRC_DIR/ngspice"
+	git clone --depth 1 http://git.code.sf.net/p/ngspice/ngspice "$SRC_DIR/ngspice"
 	cd "$SRC_DIR/ngspice" || exit
 	./autogen.sh
 	./configure --disable-debug --with-readline=yes --enable-openmp \
@@ -212,11 +212,11 @@ make clean
 # --------------------------------------------
 sudo apt -qq install -y gnome-terminal
 # Patch for Ubuntu 24 WSL 2
-dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
-systemctl --user start gnome-terminal-server
+# dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
+# systemctl --user start gnome-terminal-server
 
 # Patch for Ubuntu 24 WSL 2
-sudo apt -qq install -y lxterminal
+# sudo apt -qq install -y lxterminal
 
 # Fix xschem symbol path problem
 # WA for Xschem 3.4.6
