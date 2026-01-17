@@ -90,15 +90,15 @@ fi
 # Install PDK
 # ---------------------------------------------
 echo ">>>> Installing Volare"
-if [ ! -d "$SRC_DIR/volare" ]; then
-	git clone --depth 1 --single-branch -b main https://github.com/efabless/volare.git "$SRC_DIR/volare"
-	cd "$SRC_DIR/volare" || exit
-else
-	echo ">>>> Updating xschem"
-	cd "$SRC_DIR/volare" || exit
-	git pull
-fi
-python3 -m pip install --upgrade --no-cache-dir volare
+#if [ ! -d "$SRC_DIR/volare" ]; then
+#	git clone --depth 1 --single-branch -b main https://github.com/efabless/volare.git "$SRC_DIR/volare"
+#	cd "$SRC_DIR/volare" || exit
+#else
+#	echo ">>>> Updating xschem"
+#	cd "$SRC_DIR/volare" || exit
+#	git pull
+#fi
+python3 -m pip install --upgrade --no-cache-dir volare --break-system-packages
 # python3 -m volare enable --pdk sky130 $VOLARE_H
 # python3 -m volare enable --pdk gf180mcu $VOLARE_H
 
@@ -132,7 +132,7 @@ if [ ! -d "$SRC_DIR/xschem-gaw" ]; then
 	cd "$SRC_DIR/xschem-gaw" || exit
 	aclocal && automake --add-missing && autoconf
 	#  FIXME this is just a WA for 22.04 LTS
-	sed -i 's/GETTEXT_MACRO_VERSION = 0.18/GETTEXT_MACRO_VERSION = 0.20/g' po/Makefile.in.in
+	# sed -i 's/GETTEXT_MACRO_VERSION = 0.18/GETTEXT_MACRO_VERSION = 0.20/g' po/Makefile.in.in
 	./configure
 else
 	echo ">>>> Updating gaw"
@@ -140,7 +140,7 @@ else
         git pull
 fi
 make clean
-make -j"$(nproc)" && sudo make install
+make && sudo make install
 make clean
 
 # Install/Update KLayout
@@ -149,7 +149,7 @@ echo ">>>> Installing KLayout-$KLAYOUT_VERSION"
 wget https://www.klayout.org/downloads/Ubuntu-$UBUNTU_VERSION/klayout_$KLAYOUT_VERSION-1_amd64.deb
 sudo apt -qq install -y ./klayout_$KLAYOUT_VERSION-1_amd64.deb
 rm klayout_$KLAYOUT_VERSION-1_amd64.deb
-pip install docopt pandas pip-autoremove
+pip install docopt pandas pip-autoremove --break-system-packages
 
 # Install/update magic
 # --------------------
