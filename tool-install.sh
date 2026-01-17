@@ -30,8 +30,8 @@ export SRC_DIR="$HOME/src"
 my_path=$(realpath "$0")
 my_dir=$(dirname "$my_path")
 export SCRIPT_DIR="$my_dir"
-export UBUNTU_VERSION=22
-export KLAYOUT_VERSION=0.29.10
+export UBUNTU_VERSION=24
+export KLAYOUT_VERSION=0.30.5
 # This selects which sky130 PDK flavor (A=sky130A, B=sky130B, all=both)  is installed
 export OPEN_PDK_ARGS="--with-sky130-variants=A"
 export PDK=sky130A
@@ -128,7 +128,7 @@ make clean
 if [ ! -d "$SRC_DIR/xschem-gaw" ]; then
 	echo ">>>> Installing gaw"
 	sudo apt -qq install -y libgtk-3-dev alsa libasound2-dev gettext libtool
-	git clone --depth 1 --single-branch -b master https://github.com/StefanSchippers/xschem-gaw.git "$SRC_DIR/xschem-gaw"
+	git clone --depth 1 --single-branch -b main https://github.com/StefanSchippers/xschem-gaw.git "$SRC_DIR/xschem-gaw"
 	cd "$SRC_DIR/xschem-gaw" || exit
 	aclocal && automake --add-missing && autoconf
 	#  FIXME this is just a WA for 22.04 LTS
