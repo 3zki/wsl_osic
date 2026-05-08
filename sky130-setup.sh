@@ -46,7 +46,8 @@ fi
 # -----------------------------------
 # pip install gdsfactory
 # pip install sky130==0.8.0 flayout
-pip install sky130==0.12.2 flayout
+# pip install sky130==0.12.2 flayout
+python3 -m pip install --upgrade --no-cache-dir sky130==0.12.2 flayout --break-system-packages
 volare enable --pdk sky130 $VOLARE_H
 
 # Create .spiceinit
